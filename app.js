@@ -46,7 +46,7 @@ app.use( morgan("dev"));
 app.use(express.json());
 app.use(bodyParser.json());
 app.use(cors({
-        origin: 'http://localhost:5173',
+        origin: 'https://myapp-clientside-i1xx.vercel.app/',
         methods: ['GET', 'POST', 'DELETE', 'PUT','PATCH'],
         allowedHeaders: ['Content-Type', 'Access-Control-Allow-Credentials','Authorization'],
         credentials: true // mandoatory for google auths
