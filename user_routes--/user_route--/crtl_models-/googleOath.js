@@ -23,7 +23,7 @@ let result;
 passport.use(new GooogleStatergies({
     clientID: process.env.GOOGLE_CLIENT_ID,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    callbackURL: 'http://localhost:4000/user_side/oauth2/redirect/google',
+    callbackURL: 'https://myapp-server-side-pqkd.onrender.com/user_side/oauth2/redirect/google',
 }, 
 // console.log('Client ID:', process.env.GOOGLE_CLIENT_ID),
 // console.log('Client Secret:', process.env.GOOGLE_CLIENT_SECRET),
