@@ -46,11 +46,13 @@ app.use( morgan("dev"));
 app.use(express.json());
 app.use(bodyParser.json());
 app.use(cors({
-        origin: 'http://localhost:5173/',
+        origin: 'https://myapp-clientside-i1xx.vercel.app',
         methods: ['GET', 'POST', 'DELETE', 'PUT','PATCH'],
-        allowedHeaders: ['Content-Type', 'Access-Control-Allow-Credentials','Authorization'],
+        allowedHeaders: ['Content-Type', 'Access-Control-Allow-Credentials','Authorization','Accept'],
         credentials: true // mandoatory for google auths
 }));
+
+app.options("*",cors())
 // routes
 const user_Routes =  require('./user_routes--/user_route--/user_route.js');
 const admin_Routes =  require('./user_routes--/admin_route/admin-routes.js');
