@@ -27,8 +27,8 @@ router
 
 router.route("/oauth2/redirect/google").get(
   passport.authenticate("google", {
-    successRedirect: "http://localhost:5173/prod",
-    failureRedirect: "http://localhost:5173/login",
+    successRedirect: "https://myapp-clientside-i1xx.vercel.app",
+    failureRedirect: "https://myapp-clientside-i1xx.vercel.app/login",
     session: true,
     failureMessage: true,
   })
