@@ -21,7 +21,7 @@ app.use(cors({
         origin:'https://myapp-clientside-i1xx.vercel.app',
         methods:['GET', 'POST', 'DELETE', 'PUT','PATCH'],
         allowedHeaders:['Content-Type','Authorization','Accept'],
-        exposedHeaders: ['Access-Control-Allow-Origin'],
+        exposedHeaders:['Access-Control-Allow-Origin'],
         credentials:true // mandoatory for google auths
 }));
 
