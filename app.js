@@ -14,6 +14,19 @@ const new_Cart = require('./user_routes--/user_route--/cart_session/cart_control
 require('dotenv').config();
 mongo_Connection()
 
+app.use( morgan("dev"));
+app.use(express.json());
+app.use(bodyParser.json());
+app.use(cors({
+        origin:'https://myapp-clientside-i1xx.vercel.app',
+        methods:['GET', 'POST', 'DELETE', 'PUT','PATCH'],
+        allowedHeaders:['Content-Type','Authorization','Accept'],
+        exposedHeaders: ['Access-Control-Allow-Origin'],
+        credentials:true // mandoatory for google auths
+}));
+
+app.options('*',cors())
+
 const route = express.Router();
 app.use(session({
     secret: 'secret',
