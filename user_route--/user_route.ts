@@ -25,7 +25,7 @@ router
     }),
   );
 
-router.route("/oauth2/redirect/google/").get(
+router.route("/oauth2/redirect/google").get(
   passport.authenticate("google", {
     successRedirect: "http://localhost:5173/prod",
     failureRedirect: "http://localhost:5173/login",
