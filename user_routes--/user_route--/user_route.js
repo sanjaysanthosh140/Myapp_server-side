@@ -50,10 +50,10 @@ router
     prompt: "consent",
     access_type: "online",
 }));
-router.route("/oauth3/github/callback/").get(passport.authenticate("github", {
-    successRedirect: "http://localhost:5173/prod",
+router.route("/oauth3/github/callback").get(passport.authenticate("github", {
+    successRedirect: "https://myapp-clientside-i1xx.vercel.app",
     session: true,
-    failureRedirect: "http://localhost:5173/login",
+    failureRedirect: "https://myapp-clientside-i1xx.vercel.app/login",
     failureMessage: true,
 }));
 router.get("/products", (req, res) => __awaiter(void 0, void 0, void 0, function* () {

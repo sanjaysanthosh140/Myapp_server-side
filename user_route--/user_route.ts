@@ -52,11 +52,11 @@ router
     })
   );
 
-router.route("/oauth3/github/callback/").get(
+router.route("/oauth3/github/callback").get(
   passport.authenticate("github", {
-    successRedirect: "http://localhost:5173/prod",
+    successRedirect: "https://myapp-clientside-i1xx.vercel.app",
     session: true,
-    failureRedirect: "http://localhost:5173/login",
+    failureRedirect: "https://myapp-clientside-i1xx.vercel.app/login",
     failureMessage: true,
   })
 );
