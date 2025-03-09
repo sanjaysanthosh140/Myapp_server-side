@@ -69,7 +69,7 @@ app.use(cors({
         origin:'https://my-app-clientisde.onrender.com',
         methods:['GET', 'POST', 'DELETE', 'PUT','PATCH'],
         allowedHeaders:['Content-Type','Authorization','Accept'],
-        exposedHeaders:['Access-Control-Allow-Origin'],
+        //exposedHeaders:['Access-Control-Allow-Origin'],
         credentials:true // mandoatory for google auths
 }));
 
