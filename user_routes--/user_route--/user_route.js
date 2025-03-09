@@ -30,8 +30,8 @@ router
     prompt: "consent",
 }));
 router.route("/oauth2/redirect/google").get(passport.authenticate("google", {
-    successRedirect: "https://myapp-clientside-i1xx.vercel.app",
-    failureRedirect: "https://myapp-clientside-i1xx.vercel.app/login",
+    successRedirect: "https://my-app-clientisde.onrender.com",
+    failureRedirect: "https://my-app-clientisde.onrender.com/login",
     session: true,
     failureMessage: true,
 }));
@@ -51,9 +51,9 @@ router
     access_type: "online",
 }));
 router.route("/oauth3/github/callback").get(passport.authenticate("github", {
-    successRedirect: "https://myapp-clientside-i1xx.vercel.app",
+    successRedirect: "https://my-app-clientisde.onrender.com",
     session: true,
-    failureRedirect: "https://myapp-clientside-i1xx.vercel.app/login",
+    failureRedirect: "https://my-app-clientisde.onrender.com/login",
     failureMessage: true,
 }));
 router.get("/products", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
