@@ -82,5 +82,7 @@ router.post('/payment',stripcall);
 router.get('/wishList/:id',WishList);
 
 router.get('/retrive_wish',getWishList)
+
 router.delete("/delete_wish/:id",delete_Wish);
+
 module.exports = router;

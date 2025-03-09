@@ -86,6 +86,13 @@ app.use('/admin_side',admin_Routes)
     // next(error);
 // })
 
+app.use(express.static('dist', {
+    setHeaders: (res, path) => {
+      if (path.endsWith('.js')) {
+        res.setHeader('Content-Type', 'application/javascript');
+      }
+    },
+  }));
 
 app.listen(4000,()=>{
     console.log("server is running on port 4000");
