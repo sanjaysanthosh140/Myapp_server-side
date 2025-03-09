@@ -48,7 +48,7 @@ app.use( morgan("dev"));
 app.use(express.json());
 app.use(bodyParser.json());
 app.use(cors({
-        origin:'https://myapp-clientside-i1xx.vercel.app',
+        origin:'https://my-app-clientisde.onrender.com',
         methods:['GET', 'POST', 'DELETE', 'PUT','PATCH'],
         allowedHeaders:['Content-Type','Authorization','Accept'],
         exposedHeaders: ['Access-Control-Allow-Origin'],
