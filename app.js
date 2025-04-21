@@ -48,7 +48,8 @@ app.use( morgan("dev"));
 app.use(express.json());
 app.use(bodyParser.json());
 app.use(cors({
-        origin:'https://my-app-clientisde.onrender.com',
+        origin:'https://fir-6b2ba.web.app/',
+        //origin:'https://my-app-clientisde.onrender.com',
         methods:['GET', 'POST', 'DELETE', 'PUT','PATCH'],
         allowedHeaders:['Content-Type','Authorization','Accept'],
         exposedHeaders: ['Access-Control-Allow-Origin'],
