@@ -47,6 +47,17 @@ app.use((req, res, next) => {
 app.use(morgan("dev"));
 app.use(express.json());
 app.use(bodyParser.json());
+<<<<<<< HEAD
+=======
+app.use(cors({
+        origin:'https://fir-6b2ba.web.app/',
+        //origin:'https://my-app-clientisde.onrender.com',
+        methods:['GET', 'POST', 'DELETE', 'PUT','PATCH'],
+        allowedHeaders:['Content-Type','Authorization','Accept'],
+        exposedHeaders: ['Access-Control-Allow-Origin'],
+        credentials:true // mandoatory for google auths
+}));
+>>>>>>> 675240be52c594b3ba2539e223649b6ec7224eed
 
 
 app.options('*', cors())
@@ -61,11 +72,19 @@ app.use(express.json());
 app.use(bodyParser.json());
 
 app.use(cors({
+<<<<<<< HEAD
   origin: 'https://my-app-clientisde.onrender.com',
   methods: ['GET', 'POST', 'DELETE', 'PUT', 'PATCH'],
   allowedHeaders: ['Content-Type', 'Authorization', 'Accept'],
   //exposedHeaders:['Access-Control-Allow-Origin'],
   credentials: true // mandoatory for google auths
+=======
+        origin:'https://my-app-clientisde.onrender.com',
+        methods:['GET', 'POST', 'DELETE', 'PUT','PATCH'],
+        allowedHeaders:['Content-Type','Authorization','Accept'],
+        //exposedHeaders:['Access-Control-Allow-Origin'],
+        credentials:true // mandoatory for google auths
+>>>>>>> 675240be52c594b3ba2539e223649b6ec7224eed
 }));
 
 app.options('*', cors())
