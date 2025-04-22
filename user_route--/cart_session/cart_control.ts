@@ -102,7 +102,6 @@ export const frv_cart = async (req: Request, res: Response) => {
 };
 
 
-
 export const QuantityIncrement = async (req: Request, res: Response) => {
   let token = req.headers.authorization;
   if (req.isAuthenticated() || token) {
