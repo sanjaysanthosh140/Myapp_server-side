@@ -1,5 +1,6 @@
 import { newProd, updatePorod } from "./admin_ctrls/admin_controls";
 import {deleteProduct, deletOneUser, getallProducts, getusers, update_status } from "./admin_ctrls/admin_crud";
+import { delete_home_item, getHome_Cont, home_cont } from "./admin_ctrls/admin_home";
 import products from "./prodSchema/prod";
 const express = require('express');
 const router = express.Router();
@@ -22,8 +23,10 @@ router.get('/get_all_users',getusers);
 router.delete('/delete_user/:id',deletOneUser);
 router.get("/get_all_products",getallProducts);
 router.delete('/delete_product/:id',deleteProduct);
-router.post("/update_product",uplaod.single('image'),updatePorod)
+router.post("/update_product",uplaod.single('image'),updatePorod);
 router.put("/update_user_status/:id/",update_status)
-
+router.post('/upload_home_cont',uplaod.single('image'),home_cont);
+router.get('/get_home_cont',getHome_Cont);
+router.get('/delete_home_cont/:id',delete_home_item);
 //router.get('/get_ptod_data',get_data_to_update);
 module.exports = router;

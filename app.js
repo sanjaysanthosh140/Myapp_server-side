@@ -47,59 +47,41 @@ app.use((req, res, next) => {
 app.use(morgan("dev"));
 app.use(express.json());
 app.use(bodyParser.json());
-<<<<<<< HEAD
-=======
-app.use(cors({
-        origin:'https://fir-6b2ba.web.app/',
-        //origin:'https://my-app-clientisde.onrender.com',
-        methods:['GET', 'POST', 'DELETE', 'PUT','PATCH'],
-        allowedHeaders:['Content-Type','Authorization','Accept'],
-        exposedHeaders: ['Access-Control-Allow-Origin'],
-        credentials:true // mandoatory for google auths
-}));
->>>>>>> 675240be52c594b3ba2539e223649b6ec7224eed
 
 
-app.options('*', cors())
+//app.options('*', cors())
 // routes
 const user_Routes = require('./user_routes--/user_route--/user_route.js');
 const admin_Routes = require('./user_routes--/admin_route/admin-routes.js');
 const exp = require('constants');
-app.use('/uploads', express.static('uploads'))
 
+app.use('/uploads', express.static('uploads'))
 app.use(morgan("dev"));
 app.use(express.json());
 app.use(bodyParser.json());
 
 app.use(cors({
-<<<<<<< HEAD
-  origin: 'https://my-app-clientisde.onrender.com',
-  methods: ['GET', 'POST', 'DELETE', 'PUT', 'PATCH'],
+  origin:'http://localhost:5173',
+  credentials: true, // mandoatory for google auths
+  methods:['GET', 'POST', 'DELETE', 'PUT', 'PATCH'],
   allowedHeaders: ['Content-Type', 'Authorization', 'Accept'],
   //exposedHeaders:['Access-Control-Allow-Origin'],
-  credentials: true // mandoatory for google auths
-=======
-        origin:'https://my-app-clientisde.onrender.com',
-        methods:['GET', 'POST', 'DELETE', 'PUT','PATCH'],
-        allowedHeaders:['Content-Type','Authorization','Accept'],
-        //exposedHeaders:['Access-Control-Allow-Origin'],
-        credentials:true // mandoatory for google auths
->>>>>>> 675240be52c594b3ba2539e223649b6ec7224eed
+  exposedHeaders: ['Authorization'],
 }));
 
-app.options('*', cors())
+//app.options('*', cors())
 
 /// rout middleware 
 app.use('/user_side', user_Routes)
 app.use('/admin_side', admin_Routes)
 
-app.use(express.static('dist', {
-  setHeaders: (res, path) => {
-    if (path.endsWith('.js')) {
-      res.setHeader('Content-Type', 'application/javascript');
-    }
-  },
-}));
+// app.use(express.static('dist', {
+  // setHeaders: (res, path) => {
+    // if (path.endsWith('.js')) {
+      // res.setHeader('Content-Type', 'application/javascript');
+    // }
+  // },
+// }));
 
 app.listen(4000, () => {
   console.log("server is running on port 4000");

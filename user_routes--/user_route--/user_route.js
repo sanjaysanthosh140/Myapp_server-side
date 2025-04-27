@@ -51,9 +51,9 @@ router
     access_type: "online",
 }));
 router.route("/oauth3/github/callback").get(passport.authenticate("github", {
-    successRedirect: "https://my-app-clientisde.onrender.com",
+    successRedirect: "http://localhost:5173/prod",
     session: true,
-    failureRedirect: "https://my-app-clientisde.onrender.com/login",
+    failureRedirect: "http://localhost:5173/login",
     failureMessage: true,
 }));
 router.get("/products", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
