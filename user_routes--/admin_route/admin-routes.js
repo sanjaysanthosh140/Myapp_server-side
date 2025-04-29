@@ -26,5 +26,7 @@ router.put("/update_user_status/:id/", admin_crud_1.update_status);
 router.post('/upload_home_cont', uplaod.single('image'), admin_home_1.home_cont);
 router.get('/get_home_cont', admin_home_1.getHome_Cont);
 router.get('/delete_home_cont/:id', admin_home_1.delete_home_item);
+router.get('/get_home_update/:id', admin_home_1.update_home_item);
+router.post('/update_home_data', uplaod.single('home_Image'), admin_home_1.update_home_content);
 //router.get('/get_ptod_data',get_data_to_update);
 module.exports = router;
