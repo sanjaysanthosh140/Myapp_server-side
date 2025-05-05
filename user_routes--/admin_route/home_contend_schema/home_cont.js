@@ -5,6 +5,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = __importDefault(require("mongoose"));
 const homeSchema = new mongoose_1.default.Schema({
+    route: {
+        type: String,
+        require: true
+    },
     description: {
         type: String,
         required: true

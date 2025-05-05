@@ -4,13 +4,16 @@ import { Request, Response } from "express";
 interface MulterRequest extends Omit<Request, "body"> {
   file: Express.Multer.File;
   body: {
+    route:string,
     description: string;
   };
 }
 
 export const home_cont = async (req: MulterRequest, res: Response) => {
   try {
+    console.log("route",req.body)
     const newHome = new homeContendSchema({
+      route:req.body.route,
       description: req.body.description,
       home_Image: req.file.filename,
     });

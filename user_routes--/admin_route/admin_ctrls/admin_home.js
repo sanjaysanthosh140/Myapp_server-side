@@ -17,7 +17,9 @@ const mongoose_1 = __importDefault(require("mongoose"));
 const home_cont_1 = __importDefault(require("../home_contend_schema/home_cont"));
 const home_cont = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
+        console.log("route", req.body);
         const newHome = new home_cont_1.default({
+            route: req.body.route,
             description: req.body.description,
             home_Image: req.file.filename,
         });

@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const admin_controls_1 = require("./admin_ctrls/admin_controls");
 const admin_crud_1 = require("./admin_ctrls/admin_crud");
 const admin_home_1 = require("./admin_ctrls/admin_home");
+const sub_home_cont_1 = require("./admin_ctrls/sub_home_cont");
 const express = require('express');
 const router = express.Router();
 const multer = require('multer');
@@ -27,6 +28,8 @@ router.post('/upload_home_cont', uplaod.single('image'), admin_home_1.home_cont)
 router.get('/get_home_cont', admin_home_1.getHome_Cont);
 router.get('/delete_home_cont/:id', admin_home_1.delete_home_item);
 router.get('/get_home_update/:id', admin_home_1.update_home_item);
+//router.get('/home_cont_data',_Home_content)
 router.post('/update_home_data', uplaod.single('home_Image'), admin_home_1.update_home_content);
-//router.get('/get_ptod_data',get_data_to_update);
+router.post('/sub_multyImg', uplaod.array('prodImg', 4), sub_home_cont_1.sub_home_content);
+router.get('/Get_stack', sub_home_cont_1.getStack);
 module.exports = router;
