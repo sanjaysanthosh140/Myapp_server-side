@@ -12,12 +12,18 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.verifyToken = void 0;
 const jwt = require("jsonwebtoken");
 const verifyToken = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    console.log("isAuth", req.isAuthenticated());
+    console.log("headers", req.headers);
+    console.log("cookie", req.cookies);
     const token = yield req.headers["authorization"];
     try {
         if (req.isAuthenticated()) {
+            console.log("working in Oauth");
+            // console.log("isAuth", req.isAuthenticated());
+            // console.log("headers", req.headers);
+            // console.log("cookie", req.cookies);
             // console.log("reach isAuth()",req.isAuthenticated());
             res.setHeader("Content-Type", "application/json");
-            // 
             return res.json({
                 isAuthenticate: true,
             });
@@ -42,8 +48,6 @@ const verifyToken = (req, res, next) => __awaiter(void 0, void 0, void 0, functi
                     }
                 }); // verifyToken end
             }
-            //console.log("not",req.isAuthenticated())
-            // console.log('token',token);
         }
     }
     catch (error) {

@@ -2,6 +2,7 @@ import { newProd, updatePorod } from "./admin_ctrls/admin_controls";
 import {deleteProduct, deletOneUser, getallProducts, getusers, update_status } from "./admin_ctrls/admin_crud";
 import { delete_home_item, getHome_Cont, home_cont, update_home_content, update_home_item } from "./admin_ctrls/admin_home";
 import { getStack, sub_home_content } from "./admin_ctrls/sub_home_cont";
+import allhome_cont from "./home_contend_schema/all_home_fetch";
 //import { sub_home_content } from "./admin_ctrls/sub_home_cont";
 import products from "./prodSchema/prod";
 const express = require('express');
@@ -35,4 +36,7 @@ router.get('/get_home_update/:id',update_home_item);
 router.post('/update_home_data',uplaod.single('home_Image'),update_home_content);
 router.post('/sub_multyImg', uplaod.array('prodImg', 4), sub_home_content);
 router.get('/Get_stack',getStack)
+
+// all home session management routes 
+router.get('/get_home&sub_home_cont',allhome_cont);
 module.exports = router;

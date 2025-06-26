@@ -12,19 +12,19 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const passport = require('passport');
-const GooogleStatergies = require('passport-google-oauth20').Strategy;
+const passport = require("passport");
+const GooogleStatergies = require("passport-google-oauth20").Strategy;
 const google_Oauth_1 = __importDefault(require("../models/google_Oauth"));
 const data_hashing_1 = require("../hash_mehod--/data_hashing");
 const mongoose_1 = require("mongoose");
-require('dotenv').config();
+require("dotenv").config();
 //let encodeToken:null;
 let result;
 passport.use(new GooogleStatergies({
     clientID: process.env.GOOGLE_CLIENT_ID,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    callbackURL: 'https://myapp-server-side-pqkd.onrender.com/user_side/oauth2/redirect/google',
-}, 
+    callbackURL: "http://localhost:4000/user_side/oauth2/redirect/google",
+}, //https://myapp-server-side-pqkd.onrender.com/user_side/oauth2/redirect/google
 // console.log('Client ID:', process.env.GOOGLE_CLIENT_ID),
 // console.log('Client Secret:', process.env.GOOGLE_CLIENT_SECRET),
 function (accessToken, refreshToken, profile, done) {
@@ -32,7 +32,7 @@ function (accessToken, refreshToken, profile, done) {
         //    console.log(profile)
         if (profile) {
             const userIn = yield google_Oauth_1.default.findOne({
-                email: profile.emails[0].value
+                email: profile.emails[0].value,
             });
             if (userIn) {
                 //console.log('userIn',userIn)
@@ -74,19 +74,14 @@ passport.deserializeUser((id, done) => __awaiter(void 0, void 0, void 0, functio
         //user = await git_user.findById(objectId)
         //  console.log('Found user:', user);
         done(null, user);
+        console.log("user@@@@%%%&&&&_______", user);
         if (!user) {
-            console.log('No user found with ID:', id);
+            console.log("No user found with ID:", id);
             return done(null, false);
         }
     }
     catch (error) {
-        console.error('Deserialize error:', error);
+        console.error("Deserialize error:", error);
         done(error, null);
     }
 }));
-if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
-    throw new Error('Missing required Google OAuth credentials');
-}
-else {
-    console.log("env", process.env.GOOGLE_CLIENT_ID, "env", process.env.GOOGLE_CLIENT_SECRET);
-}

@@ -22,7 +22,7 @@ require('dotenv').config();
 passport.use(new GithubStatergies({
     clientID: process.env.Git_ClientID,
     clientSecret: process.env.Git_Client_secrets,
-    callbackURL: "https://myapp-server-side-pqkd.onrender.com/user_side/oauth3/github/callback"
+    callbackURL: "http://localhost:4000/user_side/oauth3/github/callback"
 }, function (accessToken, refreshToken, profile, cb) {
     return __awaiter(this, void 0, void 0, function* () {
         console.log('porfile', profile);

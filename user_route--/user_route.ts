@@ -27,8 +27,8 @@ router
 
 router.route("/oauth2/redirect/google").get(
   passport.authenticate("google", {
-    successRedirect: "https://my-app-clientisde.onrender.com",
-    failureRedirect: "https://my-app-clientisde.onrender.com/login",
+    successRedirect:"http://localhost:5173/prod",
+    failureRedirect:"http://localhost:5173/login",
     session: true,
     failureMessage: true,
   })
