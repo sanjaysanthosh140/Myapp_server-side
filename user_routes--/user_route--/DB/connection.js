@@ -27,4 +27,3 @@ const mongo_Connection = () => __awaiter(void 0, void 0, void 0, function* () {
     }
 });
 exports.mongo_Connection = mongo_Connection;
-exports.default = dbconnection = mongoose.connection;

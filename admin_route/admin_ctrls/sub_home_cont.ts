@@ -47,9 +47,9 @@ export const sub_home_content = (req: multerreq, res: Response) => {
 
 export const getStack = (req: Request, res: Response) => {
   try {
-    console.log( req.query.stack);
+    console.log( "___------",req.query.stack);
     const stackOne = req.query.stack;
-
+     
     home_sub_content.findOne({"stacks.title":stackOne }).then((data: any) => {
       if (data) {
         console.log(data);

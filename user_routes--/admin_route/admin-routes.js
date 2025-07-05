@@ -1,13 +1,10 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 const admin_controls_1 = require("./admin_ctrls/admin_controls");
 const admin_crud_1 = require("./admin_ctrls/admin_crud");
 const admin_home_1 = require("./admin_ctrls/admin_home");
 const sub_home_cont_1 = require("./admin_ctrls/sub_home_cont");
-const all_home_fetch_1 = __importDefault(require("./home_contend_schema/all_home_fetch"));
+const all_home_fetch_1 = require("./home_contend_schema/all_home_fetch");
 const express = require('express');
 const router = express.Router();
 const multer = require('multer');
@@ -37,5 +34,6 @@ router.post('/update_home_data', uplaod.single('home_Image'), admin_home_1.updat
 router.post('/sub_multyImg', uplaod.array('prodImg', 4), sub_home_cont_1.sub_home_content);
 router.get('/Get_stack', sub_home_cont_1.getStack);
 // all home session management routes 
-router.get('/get_home&sub_home_cont', all_home_fetch_1.default);
+router.get('/get_home&sub_home_cont', all_home_fetch_1.allhome_cont);
+router.put('/all_home_content_update', uplaod.fields([{ name: 'main_img' }, { name: 'sub_img' }]), all_home_fetch_1.sub_main_updates_home_cont);
 module.exports = router;
