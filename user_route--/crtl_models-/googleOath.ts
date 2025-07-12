@@ -74,7 +74,7 @@ passport.deserializeUser(async (id: any, done: any) => {
     //user = await git_user.findById(objectId)
     //  console.log('Found user:', user);
     done(null, user);
-    console.log("user@@@@%%%&&&&_______", user);
+    //console.log("user@@@@%%%&&&&_______", user);
 
     if (!user) {
       console.log("No user found with ID:", id);

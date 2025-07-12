@@ -17,9 +17,9 @@ export const sub_home_content = (req: multerreq, res: Response) => {
     const sub_home_conts = new home_sub_content({
       stacks: [
         {
-            title: subHoe_body.prodTitle1,
-            description: subHoe_body.prodDesc1,
-            image: req.files[0].filename,
+          title: subHoe_body.prodTitle1,
+          description: subHoe_body.prodDesc1,
+          image: req.files[0].filename,
         },
         {
           title: subHoe_body.prodTitle2,
@@ -39,18 +39,18 @@ export const sub_home_content = (req: multerreq, res: Response) => {
       ],
     });
 
-    sub_home_conts.save().then((data:any)=>{
-        console.log(data);
-    })
+    sub_home_conts.save().then((data: any) => {
+      console.log(data);
+    });
   }
 };
 
 export const getStack = (req: Request, res: Response) => {
   try {
-    console.log( "___------",req.query.stack);
+    console.log("___------", req.query.stack);
     const stackOne = req.query.stack;
-     
-    home_sub_content.findOne({"stacks.title":stackOne }).then((data: any) => {
+
+    home_sub_content.findOne({ "stacks.title": stackOne }).then((data: any) => {
       if (data) {
         console.log(data);
         res.setHeader("Content-Type", "application/json");
