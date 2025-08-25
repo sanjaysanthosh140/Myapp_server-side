@@ -134,40 +134,39 @@ interface custom_home_variable {
           _id: string;
         }
       ];
+    },
+
+    {
+      home_name: string;
+      home_image: string;
+      home_id: string;
+      sub_home_data: [
+        {
+          title: string;
+          description: string;
+          image: string;
+          _id: string;
+        },
+        {
+          title: string;
+          description: string;
+          image: string;
+          _id: string;
+        },
+        {
+          title: string;
+          description: string;
+          image: string;
+          _id: string;
+        },
+        {
+          title: string;
+          description: string;
+          image: string;
+          _id: string;
+        }
+      ];
     }
-
-    // {
-      // home_name: string;
-      // home_image: string;
-      // home_id: string;
-      // sub_home_data: [
-        // {
-          // title: string;
-          // description: string;
-          // image: string;
-          // _id: string;
-        // },
-        // {
-          // title: string;
-          // description: string;
-          // image: string;
-          // _id: string;
-        // },
-        // {
-          // title: string;
-          // description: string;
-          // image: string;
-          // _id: string;
-        // },
-        // {
-          // title: string;
-          // description: string;
-          // image: string;
-          // _id: string;
-        // }
-      // ];
-    // }
-
   ];
 }
 
@@ -348,38 +347,38 @@ let custom_home_data: custom_home_variable = {
           _id: "",
         },
       ],
-    }
-    // {
-      // home_name: "",
-      // home_image: "",
-      // home_id: "",
-      // sub_home_data: [
-        // {
-          // title: "",
-          // description: "",
-          // image: "",
-          // _id: "",
-        // },
-        // {
-          // title: "",
-          // description: "",
-          // image: "",
-          // _id: "",
-        // },
-        // {
-          // title: "",
-          // description: "",
-          // image: "",
-          // _id: "",
-        // },
-        // {
-          // title: "",
-          // description: "",
-          // image: "",
-          // _id: "",
-        // },
-      // ],
-    // },
+    },
+    {
+      home_name: "",
+      home_image: "",
+      home_id: "",
+      sub_home_data: [
+        {
+          title: "",
+          description: "",
+          image: "",
+          _id: "",
+        },
+        {
+          title: "",
+          description: "",
+          image: "",
+          _id: "",
+        },
+        {
+          title: "",
+          description: "",
+          image: "",
+          _id: "",
+        },
+        {
+          title: "",
+          description: "",
+          image: "",
+          _id: "",
+        },
+      ],
+    },
   ],
 };
 const sub_main_updates_home_cont = async (
@@ -393,62 +392,58 @@ const sub_main_updates_home_cont = async (
 
     const arr = Object.values(custom_data); // data _created for send to client-side display for admin session for update
     console.log("update_form-client", arr2);
-    arr2.map((data: any, x: number) => {
+    arr2.map((data: any, x: number) => {   // main_home data-text
       // arr2 first /0th position data   itrate 5 time total
       // title *1*5
       // image *1*5
       // _id   *1*5
-      if (data.image) {
-        custom_home_data.home_data[x].home_image = "";
+      if (data.image && data.imagePreview) {
+        custom_home_data.home_data[x].home_image = " ";
       } else {
         custom_home_data.home_data[x].home_image = data.home_img;
       }
+
       custom_home_data.home_data[x].home_name = data.home_name;
       custom_home_data.home_data[x].home_id = data._id;
-      data.sub_home_data.map((data: any, i: any) => {
+      console.log(data);
+
+      data.sub_home_data.map((data: any, i: any) => {  // sub-home_data-text
+        console.log("-------------------------------------------");
         custom_home_data.home_data[x].sub_home_data[i].title = data.title;
         custom_home_data.home_data[x].sub_home_data[i].image = data.image;
         custom_home_data.home_data[x].sub_home_data[i].description =
           data.description;
         custom_home_data.home_data[x].sub_home_data[i]._id = data._id;
-        //description *4
-        //                                                                      [{{0},{1},{2},{3},{4},{5}},
-        //                                                                      {{0},
-        //                                                                      {1},{2},{3},
-        //                                                                      {4},{5}},{{0},
-        //                                                                      {1},{2},{3},{4},{5}},
-        //                                                                      {{0},
-        //                                                                      {1},{2},
-        //                                                                      {3},{4},{5}},
-        //                                                                      {{0},{1},{2},{3},{4},{5}}]
-        //_id *4
+        console.log(data);
       });
     });
 
+    console.log(home_images);
     custom_home_data.home_data.map((datas: any, i: number) => {
-      // condition for adding image in home_cont
+                                                                  //condition for adding image in home_cont
       if (
-        datas.home_image.trim() == '' &&
-        home_images.main_img &&
-        home_images.main_img[i]
+        datas.home_image.trim() == ""
+        //&& home_images.main_img &&
+        // home_images.main_img[i]
       ) {
-        console.log(home_images.main_img, home_images.main_img[i]);
-        datas.home_image = home_images.main_img[i].filename;
+        //datas.home_image = home_images.main_img[i].filename;                        main_images adding
+        datas.home_image = home_images.main_img[0].filename;
+        if (home_images.main_img.length !== 1) {
+          home_images.main_img.splice(0, 1);   // 🚨 Remove the used file!
+        }
       }
-       
-       
-       
-      
-      datas.sub_home_data.map((cont: any, i: number) => {
-        console.log(cont.image);
-        console.log(cont.title);
-        console.log(cont.description);
+
+      datas.sub_home_data.map((cont: any, i: number) => {                            // sub_images adding
         if (
-        typeof cont.image === "object" &&
-        cont.image !== null &&
-        Object.keys(cont.image).length === 0
+          typeof cont.image === "object" &&
+          cont.image !== null &&
+          Object.keys(cont.image).length === 0
         ) {
-        cont.image = home_images.sub_img[i].filename;
+          cont.image = home_images.sub_img[0].filename;
+          if (home_images.sub_img.length !== 1) {
+            home_images.sub_img.splice(0, 1);  // 🚨 Remove the used file!
+          }
+          //console.log("image condition true", cont.image);
         }
       });
     });
@@ -456,22 +451,24 @@ const sub_main_updates_home_cont = async (
     /// update $queryes.........[${
     // }];
     for (const item of custom_home_data.home_data) {
-      //_id ,home_name,home_image
-      await homeContendSchema.updateOne(
-        {
-          _id: item.home_id,
-        },
-        {
-          $set: {
-            description: item.home_name,
-            home_Image: item.home_image,
+      // _id ,home_name,home_image
+      await homeContendSchema
+        .updateOne(
+          {
+            _id: item.home_id,
           },
-        }
-      ).then((data)=>{
-        console.log("main_home",data)
-      })
+          {
+            $set: {
+              description: item.home_name,
+              home_Image: item.home_image,
+            },
+          }
+        )
+        .then((data) => {
+          console.log("main_home", data);
+        });
     }
-    //
+
     let custom_item_sub = custom_home_data.home_data;
     for (const items of custom_item_sub) {
       items.sub_home_data.map((data: any, i: any) => {
@@ -494,7 +491,6 @@ const sub_main_updates_home_cont = async (
             console.log(data);
           });
       });
-      //
     }
   } catch (error) {
     console.log(error);

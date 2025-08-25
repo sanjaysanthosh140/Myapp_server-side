@@ -7,7 +7,7 @@ import { frv_cart, new_Cart, QuantityIncrement } from "./cart_session/cart_contr
 import { stripcall } from "./crtl_models-/strip";
 import { delete_Wish, getWishList, WishList } from "./wishList/wishCtrl";
 //import { frv_Cart } from "./cart_session/cart_control";
-const dotenv = require("dotenv")
+const dotenv = require("dotenv");
 dotenv.config();
 const passport = require("passport");
 const express = require("express");
@@ -20,7 +20,7 @@ router
   .route("/oauth/google")
   .get(
     passport.authenticate("google", {
-      scope: ["profile", "email"],
+      scope:["profile", "email"],
       prompt: "consent",
     }),
   );
@@ -37,7 +37,7 @@ router.route("/oauth2/redirect/google").get(
 router
   .route("/github/oauth")
   .get(
-    passport.authenticate("github", {
+    passport.authenticate("github", { //
       scope: [
         "user:email",
         "read:user",
@@ -53,7 +53,7 @@ router
   );
 
 router.route("/oauth3/github/callback").get(
-  passport.authenticate("github", {
+  passport.authenticate("github",{
     successRedirect:"http://localhost:5173/prod",
     session: true,
     failureRedirect:"http://localhost:5173/login",

@@ -16,6 +16,7 @@ exports.prodList = exports.userz_log = exports.new_user = void 0;
 const data_hashing_1 = require("../hash_mehod--/data_hashing");
 const user_models_1 = __importDefault(require("../models/user_models"));
 const jwt_1 = require("../Autherization/jwt");
+const Main_function_1 = require("../C_ounter_Mail/Main_function");
 const new_user = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         let exist = yield user_models_1.default.exists({ email: req.body.email });
@@ -33,6 +34,7 @@ const new_user = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
                 console.log(newUser);
                 res.setHeader('Content-Type', 'application/json');
                 res.status(200).json({ data: newUser.name, token: encodeToken });
+                (0, Main_function_1.counter_mail)(req.body);
             })).catch((error) => {
                 console.log(error);
             });
@@ -48,7 +50,7 @@ const new_user = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 exports.new_user = new_user;
 const userz_log = (req, res) => {
     try {
-        console.log("req.body", req.body);
+        // console.log("req.body", req.body);
         if (!req.body.email || !req.body.password) {
             return res.status(400).json({
                 message: "please provide email and password",
@@ -59,7 +61,7 @@ const userz_log = (req, res) => {
                 (data === null || data === void 0 ? void 0 : data.isDisabled) === true ? res.setHeader('Content-Type', 'application/json') &&
                     res.status(400).json({ message: 'account disabled' }) :
                     (0, data_hashing_1.decode_user)(req.body).then((data) => __awaiter(void 0, void 0, void 0, function* () {
-                        console.log("login", data);
+                        //console.log("login", data);
                         const encodeToken = yield (0, jwt_1.generateToken)(data._id);
                         res.setHeader('Content-Type', 'application/json');
                         res.status(200).json({

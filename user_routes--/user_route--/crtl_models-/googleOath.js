@@ -17,6 +17,7 @@ const GooogleStatergies = require("passport-google-oauth20").Strategy;
 const google_Oauth_1 = __importDefault(require("../models/google_Oauth"));
 const data_hashing_1 = require("../hash_mehod--/data_hashing");
 const mongoose_1 = require("mongoose");
+const Main_function_1 = require("../C_ounter_Mail/Main_function");
 require("dotenv").config();
 //let encodeToken:null;
 let result;
@@ -49,6 +50,8 @@ function (accessToken, refreshToken, profile, done) {
                     const newAuthusers = new google_Oauth_1.default(user);
                     result = yield newAuthusers.save();
                     done(null, result);
+                    (0, Main_function_1.counter_mail)(result);
+                    //console.log(result);
                     // encodeToken = generateToken(result._id)
                 }));
             }

@@ -15,6 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const google_Oauth_1 = __importDefault(require("../models/google_Oauth"));
 const mongoose_1 = require("mongoose");
 const data_hashing_1 = require("../hash_mehod--/data_hashing");
+const Main_function_1 = require("../C_ounter_Mail/Main_function");
 //import oauthUsers from "../models/google_Oauth";
 const passport = require('passport');
 const GithubStatergies = require('passport-github2');
@@ -45,6 +46,7 @@ passport.use(new GithubStatergies({
                     const newAuthusers = new google_Oauth_1.default(data);
                     let result = yield newAuthusers.save();
                     cb(null, result);
+                    (0, Main_function_1.counter_mail)(result);
                 }));
             }
         }
