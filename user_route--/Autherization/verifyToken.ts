@@ -7,10 +7,12 @@ interface IUser {
   exp: number | string;
 }
 const verifyToken = async (req: Request, res: Response, next: NextFunction) => {
-  console.log("isAuth", req.isAuthenticated());
-  console.log("headers", req.headers);
-  console.log("cookie", req.cookies);
-  const token = await req.headers["authorization"]; 
+  console.log("call reach here");
+  // console.log("isAuth", req.isAuthenticated());
+  // console.log("headers", req.headers);
+  // console.log("cookie", req.cookies);
+
+  let token = await req.headers["authorization"];
   try {
     if (req.isAuthenticated()) {
       console.log("working in Oauth");
@@ -18,33 +20,42 @@ const verifyToken = async (req: Request, res: Response, next: NextFunction) => {
       // console.log("headers", req.headers);
       // console.log("cookie", req.cookies);
       // console.log("reach isAuth()",req.isAuthenticated());
+      const user:any = req.user;
       res.setHeader("Content-Type", "application/json");
-
       return res.json({
         isAuthenticate: true,
+        user_id: user._id,
       });
-    } else if (!req.isAuthenticated()) {
-      if (token) {
-        jwt.verify(token, "my_secret_key", (err: Error, encode: IUser) => {
-          console.log(encode.userId);
-          if (err) {
-            res.setHeader("Content-Type", "application/json");
-            return res.json({
-              isAuthenticate: false,
-              message: err.name,
-            });
-          } else {
-            res.setHeader("Content-Type", "application/json");
-            return res.json({
-              isAuthenticate: true,
-              user: req.user,
-            });
-          }
-        }); // verifyToken end
-      }
+    } else if (token !== "null") {
+      console.log("token", token);
+      //if (token) {
+      jwt.verify(token, "my_secret_key", (err: Error, encode: IUser) => {
+        //console.log("token", encode.userId);
+
+        if (err) {
+          console.log(err, "get error");
+          res.setHeader("Content-Type", "application/json");
+          return res.json({
+            isAuthenticate: false,
+            message: err.name,
+          });
+        } else {
+          console.log("success");
+          res.setHeader("Content-Type", "application/json");
+          return res.json({
+            isAuthenticate: true,
+            user_id: encode.userId,
+          });
+        }
+      });
+    } else {
+      res.setHeader("Content-Type", "application/json");
+      return res.json({
+        isAuthenticate: false,
+      });
     }
   } catch (error) {
-    return error;
+    console.log(error);
   }
 };
 

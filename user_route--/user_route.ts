@@ -3,9 +3,9 @@ import { new_user, prodList, userz_log } from "./crtl_models-/ctrl_methos";
 import { verifyToken } from "./Autherization/verifyToken";
 import products from "../admin_route/prodSchema/prod";
 import { getPoducts } from "./dataBaseControls/DBQuerys";
-import { frv_cart, new_Cart, QuantityIncrement } from "./cart_session/cart_control";
-import { stripcall } from "./crtl_models-/strip";
-import { delete_Wish, getWishList, WishList } from "./wishList/wishCtrl";
+import { new_Cart } from "./cart_session/cart_control";
+//import { stripcall } from "./crtl_models-/strip";
+import { getWishList} from "./wishList/wishCtrl";
 //import { frv_Cart } from "./cart_session/cart_control";
 const dotenv = require("dotenv");
 dotenv.config();
@@ -71,18 +71,18 @@ router.get("/products", async (req: Request, res: Response) => {
 
 router.get("/checkauth",verifyToken);
 
-router.get('/newCart/:id',new_Cart);
+router.post('/newCart',new_Cart);
 
-router.get('/Frv_carts',frv_cart);
+//router.get('/Frv_carts',frv_cart);
 
-router.put('/decrement',QuantityIncrement);
+//router.put('/decrement',QuantityIncrement);
 
-router.post('/payment',stripcall);
+//router.post('/payment',stripcall);
 
-router.get('/wishList/:id',WishList);
+//router.get('/wishList/:id',WishList);
 
-router.get('/retrive_wish',getWishList)
+router.get('/retrive_wish/:id',getWishList);
 
-router.delete("/delete_wish/:id",delete_Wish);
+//router.delete("/delete_wish/:id",delete_Wish);
 
 module.exports = router;

@@ -40,11 +40,15 @@ const frvort_Cart = new mongoose_1.Schema({
     },
     items: [
         {
-            productId: {
-                type: mongoose_1.Types.ObjectId,
-                required: true,
+            category: {
+                type: String,
+                require: true,
             },
-            quantity: {
+            toolName: {
+                type: String,
+                require: true
+            },
+            toolId: {
                 type: Number,
                 required: true,
             },

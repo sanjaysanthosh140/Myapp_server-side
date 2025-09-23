@@ -12,23 +12,31 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CartprodQtyaction = exports.add_to_cart = void 0;
+exports.add_to_cart = void 0;
 const frvort_Cart_1 = __importDefault(require("../../models/frvort_Cart"));
-const prod_1 = __importDefault(require("../../../admin_route/prodSchema/prod"));
+// interface cartItems {
+// userId: Types.ObjectId | String;
+// items: [
+// {
+// productId: Types.ObjectId;
+// quantity: Number;
+// }
+// ];
+// }
+// interface cartAction {
+// userId: Types.ObjectId;
+// prodId: mongoose.Types.ObjectId;
+// action: string;
+// }
 const add_to_cart = (id, items) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         console.log("add_to_cart", id, items);
         let cart = yield frvort_Cart_1.default.findOne({ userId: id });
         if (cart) {
-            let itemIndex = cart.items.findIndex((p) => p.productId == items[0].productId);
+            let itemIndex = cart.items.findIndex((p) => p.toolId === items[0].toolId);
             if (itemIndex !== -1) {
-                cart.items[itemIndex] = {
-                    productId: cart.items[itemIndex].productId,
-                    quantity: Number(cart.items[itemIndex].quantity) + 1,
-                };
-                cart.save();
                 return {
-                    message: "cart quantity updated",
+                    message: "it is already added",
                 };
             }
             else {
@@ -57,41 +65,43 @@ const add_to_cart = (id, items) => __awaiter(void 0, void 0, void 0, function* (
     }
 });
 exports.add_to_cart = add_to_cart;
-const CartprodQtyaction = (userId, prodId, action) => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        let cart = yield frvort_Cart_1.default.findOne({ userId: userId });
-        let product = yield prod_1.default.findById(prodId);
-        if (cart && product) {
-            let cartIndex = yield cart.items.findIndex((p) => p.productId.toString() === prodId.toString());
-            if (cartIndex !== -1) {
-                const basePrice = product.prodPrice / cart.items[cartIndex].quantity;
-                if (action === "increment") {
-                    cart.items[cartIndex].quantity++;
-                    product.prodPrice = basePrice * cart.items[cartIndex].quantity;
-                }
-                else if (action === "decrement") {
-                    if (cart.items[cartIndex].quantity === 1) {
-                        cart.items.splice(cartIndex, 1);
-                        product.prodPrice = basePrice;
-                    }
-                    else {
-                        cart.items[cartIndex].quantity--;
-                        product.prodPrice = basePrice * cart.items[cartIndex].quantity;
-                    }
-                }
-                yield product.save();
-                yield cart.save();
-                return {
-                    cart,
-                    // updatedPrice: product.prodPrice,
-                    // quantity: cart.items[cartIndex]?.quantity || 0
-                };
-            }
-        }
-    }
-    catch (error) {
-        console.log(error);
-        throw error;
-    }
-});
-exports.CartprodQtyaction = CartprodQtyaction;
+// export const CartprodQtyaction = async (
+// userId: any,
+// prodId: any,
+// action: string
+// ) => {
+// try {
+// let cart = await cart_itesm.findOne({ userId: userId });
+// let product = await products.findById(prodId);
+// if (cart && product) {
+// let cartIndex = await cart.items.findIndex(
+// (p) => p.productId.toString() === prodId.toString()
+// );
+// if (cartIndex !== -1) {
+//const basePrice = product.prodPrice / cart.items[cartIndex].quantity;
+// if (action === "increment") {
+// cart.items[cartIndex].quantity++;
+// product.prodPrice = basePrice * cart.items[cartIndex].quantity;
+// } else if (action === "decrement") {
+// if (cart.items[cartIndex].quantity === 1) {
+// cart.items.splice(cartIndex, 1);
+// product.prodPrice = basePrice;
+// } else {
+// cart.items[cartIndex].quantity--;
+// product.prodPrice = basePrice * cart.items[cartIndex].quantity;
+// }
+// }
+// await product.save();
+// await cart.save();
+// return {
+// cart,
+// updatedPrice: product.prodPrice,
+// quantity: cart.items[cartIndex]?.quantity || 0
+// };
+//}
+//}
+// } catch (error) {
+// console.log(error);
+// throw error;
+// }
+//};

@@ -1,11 +1,12 @@
 import mongoose, { Schema, Types } from "mongoose";
 interface cartItems {
-  userId: any
+  userId: mongoose.Schema.Types.ObjectId;
   items: [
     {
-      
-      productId: Types.ObjectId;
-      quantity: number;
+      category: string;
+      toolName:string;
+      toolId: Number;
+
     }
   ];
 }
@@ -14,18 +15,22 @@ const frvort_Cart = new Schema<cartItems>({
     type: mongoose.Schema.Types.ObjectId,
     required: true,
   },
-  items:[
+  items: [
     {
-      productId: {
-        type: Types.ObjectId,
-        required: true,
+      category: {
+        type: String,
+        require: true,
       },
-      quantity: {
+      toolName:{
+       type:String,
+       require:true
+      },
+      toolId: {
         type: Number,
         required: true,
       },
     },
   ],
 });
-const cart_itesm = mongoose.model("cart_items",frvort_Cart);
+const cart_itesm = mongoose.model("cart_items", frvort_Cart);
 export = cart_itesm;

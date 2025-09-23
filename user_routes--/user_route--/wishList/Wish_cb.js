@@ -12,86 +12,75 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.achive_wish = exports.creat_wish = void 0;
+exports.achive_wish = void 0;
 const mongoose_1 = require("mongoose");
-const whishList_1 = __importDefault(require("../models/whishList"));
-const creat_wish = (prodId, userId, cb) => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        const item = {
-            prodId: prodId,
-        };
-        if (!prodId || !userId) {
-            return cb(new Error("prodId or userId is missing"), null);
-        }
-        else {
-            const existlist = yield whishList_1.default.findOne({
-                userId: userId,
-            });
-            if (existlist) {
-                const findIndex = existlist.item.findIndex((p) => p.prodId.toString() === prodId.toString());
-                if (findIndex !== -1) {
-                    return cb(new Error("product already in wishList"), null);
-                }
-                else {
-                    existlist.item.push(item);
-                    yield existlist.save();
-                }
-            }
-            else {
-                let wishList = new whishList_1.default({
-                    userId: userId,
-                    item: [item],
-                });
-                let exist = yield wishList.save();
-                exist ? console.log(exist) : console.log("wishlist not created");
-                return cb(null, "wishList created!!");
-            }
-        }
-    }
-    catch (error) {
-        console.log(error);
-        return cb(error, null);
-    }
-});
-exports.creat_wish = creat_wish;
+const frvort_Cart_1 = __importDefault(require("../models/frvort_Cart"));
+// export const creat_wish = async (
+//   prodId: Types.ObjectId,
+//   userId: Types.ObjectId,
+//   cb: any
+// ) => {
+//   try {
+//     const item = {
+//       prodId: prodId,
+//     };
+//     if (!prodId || !userId) {
+//       return cb(new Error("prodId or userId is missing"), null);
+//     } else {
+//       const existlist = await wishList_model.findOne({
+//         userId: userId,
+//       });
+//       if (existlist) {
+//         const findIndex = existlist.item.findIndex(
+//           (p) => p.prodId.toString() === prodId.toString()
+//         );
+//         if (findIndex !== -1) {
+//           return cb(new Error("product already in wishList"), null);
+//         } else {
+//           existlist.item.push(item);
+//           await existlist.save();
+//         }
+//       } else {
+//         let wishList = new wishList_model({
+//           userId: userId,
+//           item: [item],
+//         });
+//         let exist = await wishList.save();
+//         exist ? console.log(exist) : console.log("wishlist not created");
+//         return cb(null, "wishList created!!");
+//       }
+//     }
+//   } catch (error) {
+//     console.log(error);
+//     return cb(error, null);
+//   }
+// };
 const achive_wish = (userId, cb) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        console.log(userId);
+        console.log("fun achive", userId);
         // let id = new Types.ObjectId(userId)
-        const user_wish = yield whishList_1.default.aggregate([
+        const user_wish = yield frvort_Cart_1.default.aggregate([
             {
                 $match: { userId: new mongoose_1.Types.ObjectId(userId) },
-            },
-            {
-                $unwind: "$item",
-            },
-            {
-                $project: {
-                    items: "$item.prodId",
-                    _id: 0,
-                },
             },
             {
                 $unwind: "$items",
             },
             {
-                $lookup: {
-                    from: "products",
-                    localField: "items",
-                    foreignField: "_id",
-                    as: "wishList",
+                $project: {
+                    category: "$items.category",
+                    toolId: "$items.toolId",
+                    toolName: "$items.toolName",
+                    _id: 0
                 },
             },
             {
-                $project: {
-                    wishList: { $arrayElemAt: ["$wishList", 0] }
-                }
+                $unwind: "$category",
             },
-            { $unwind: "$wishList" },
         ]);
-        //console.log(user_wish);
+        console.log(user_wish);
         if (user_wish) {
-            return cb(null, user_wish.map(item => item.wishList));
+            return cb(null, user_wish.map((item) => item));
         }
     }
     catch (error) {
