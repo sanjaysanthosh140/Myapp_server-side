@@ -11,9 +11,9 @@ const GithubStatergies = require('passport-github2');
 require('dotenv').config();
 
 passport.use(new GithubStatergies({
-    clientID:process.env.Git_ClientID,             
-    clientSecret:process.env.Git_Client_secrets,
-    callbackURL:'https://myapp-server-side-rfxp.onrender.com/user_side/oauth3/github/callback'
+    clientID: process.env.Git_ClientID,             
+    clientSecret: process.env.Git_Client_secrets,
+    callbackURL: "https://myapp-server-side-rfxp.onrender.com/user_side/oauth3/github/callback"
 },
 async function(accessToken:any,refreshToken:any,profile:any,cb:any){
     console.log('porfile',profile)
