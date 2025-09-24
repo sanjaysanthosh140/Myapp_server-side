@@ -13,7 +13,7 @@ require('dotenv').config();
 passport.use(new GithubStatergies({
     clientID:process.env.Git_ClientID,             
     clientSecret:process.env.Git_Client_secrets,
-    callbackURL:"http://localhost:4000/user_side/oauth3/github/callback"
+    callbackURL:`${process.env.server_link}/user_side/oauth3/github/callback`
 },
 async function(accessToken:any,refreshToken:any,profile:any,cb:any){
     console.log('porfile',profile)

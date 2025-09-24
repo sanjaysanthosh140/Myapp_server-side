@@ -67,6 +67,6 @@ app.use('/user_side', user_Routes)
 app.use('/admin_side', admin_Routes)
 
 
-app.listen(port, () => {
+app.listen(port,'0.0.0.0', () => {
   console.log("server is running on port 4000");
 })
