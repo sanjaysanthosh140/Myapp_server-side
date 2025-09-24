@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import { new_user, prodList, userz_log } from "./crtl_models-/ctrl_methos";
 import { verifyToken } from "./Autherization/verifyToken";
 import products from "../admin_route/prodSchema/prod";
-import { getPoducts } from "./dataBaseControls/DBQuerys";
+//import { getPoducts } from "./dataBaseControls/DBQuerys";
 import { new_Cart } from "./cart_session/cart_control";
 //import { stripcall } from "./crtl_models-/strip";
 import { getWishList} from "./wishList/wishCtrl";
@@ -27,8 +27,8 @@ router
 
 router.route("/oauth2/redirect/google").get(
   passport.authenticate("google", {
-    successRedirect:"http://localhost:5173/prod",
-    failureRedirect:"http://localhost:5173/login",
+    successRedirect:"http://localhost:5173",
+    failureRedirect:"http://localhost:5173",
     session: true,
     failureMessage: true,
   })
@@ -54,20 +54,20 @@ router
 
 router.route("/oauth3/github/callback").get(
   passport.authenticate("github",{
-    successRedirect:"http://localhost:5173/prod",
+    successRedirect:"http://localhost:5173",
     session: true,
-    failureRedirect:"http://localhost:5173/login",
+    failureRedirect:"http://localhost:5173",
     failureMessage: true,
   })
-);
+); 
 
 
-router.get("/products", async (req: Request, res: Response) => {
-  const product = await getPoducts();
-  console.log(product);
-  res.contentType("application/json");
-  res.status(200).json([product]);
-});
+// router.get("/products", async (req: Request, res: Response) => {
+  // const product = await getPoducts();
+  // console.log(product);
+  // res.contentType("application/json");
+  // res.status(200).json([product]);
+// });
 
 router.get("/checkauth",verifyToken);
 

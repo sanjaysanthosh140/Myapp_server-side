@@ -11,6 +11,7 @@ const MongoStore = require('connect-mongo');
 const session = require('express-session');
 const verifyToken = require('./user_routes--/user_route--/Autherization/verifyToken.js');
 const new_Cart = require('./user_routes--/user_route--/cart_session/cart_control.js');
+const port = 4000;
 require('dotenv').config();
 mongo_Connection();
 
@@ -66,6 +67,6 @@ app.use('/user_side', user_Routes)
 app.use('/admin_side', admin_Routes)
 
 
-app.listen(4000, () => {
+app.listen(port, () => {
   console.log("server is running on port 4000");
 })

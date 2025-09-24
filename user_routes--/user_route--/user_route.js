@@ -1,17 +1,8 @@
 "use strict";
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 const ctrl_methos_1 = require("./crtl_models-/ctrl_methos");
 const verifyToken_1 = require("./Autherization/verifyToken");
-const DBQuerys_1 = require("./dataBaseControls/DBQuerys");
+//import { getPoducts } from "./dataBaseControls/DBQuerys";
 const cart_control_1 = require("./cart_session/cart_control");
 //import { stripcall } from "./crtl_models-/strip";
 const wishCtrl_1 = require("./wishList/wishCtrl");
@@ -30,8 +21,8 @@ router
     prompt: "consent",
 }));
 router.route("/oauth2/redirect/google").get(passport.authenticate("google", {
-    successRedirect: "http://localhost:5173/prod",
-    failureRedirect: "http://localhost:5173/login",
+    successRedirect: "http://localhost:5173",
+    failureRedirect: "http://localhost:5173",
     session: true,
     failureMessage: true,
 }));
@@ -51,17 +42,17 @@ router
     access_type: "online",
 }));
 router.route("/oauth3/github/callback").get(passport.authenticate("github", {
-    successRedirect: "http://localhost:5173/prod",
+    successRedirect: "http://localhost:5173",
     session: true,
-    failureRedirect: "http://localhost:5173/login",
+    failureRedirect: "http://localhost:5173",
     failureMessage: true,
 }));
-router.get("/products", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const product = yield (0, DBQuerys_1.getPoducts)();
-    console.log(product);
-    res.contentType("application/json");
-    res.status(200).json([product]);
-}));
+// router.get("/products", async (req: Request, res: Response) => {
+// const product = await getPoducts();
+// console.log(product);
+// res.contentType("application/json");
+// res.status(200).json([product]);
+// });
 router.get("/checkauth", verifyToken_1.verifyToken);
 router.post('/newCart', cart_control_1.new_Cart);
 //router.get('/Frv_carts',frv_cart);
