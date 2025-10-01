@@ -21,8 +21,8 @@ router
     prompt: "consent",
 }));
 router.route("/oauth2/redirect/google").get(passport.authenticate("google", {
-    successRedirect: "http://localhost:5173",
-    failureRedirect: "http://localhost:5173",
+    successRedirect: "https://client-side-24a22.web.app",
+    failureRedirect: "https://client-side-24a22.web.app",
     session: true,
     failureMessage: true,
 }));
@@ -42,9 +42,9 @@ router
     access_type: "online",
 }));
 router.route("/oauth3/github/callback").get(passport.authenticate("github", {
-    successRedirect: "http://localhost:5173",
+    successRedirect: "https://client-side-24a22.web.app",
     session: true,
-    failureRedirect: "http://localhost:5173",
+    failureRedirect: "https://client-side-24a22.web.app",
     failureMessage: true,
 }));
 // router.get("/products", async (req: Request, res: Response) => {
