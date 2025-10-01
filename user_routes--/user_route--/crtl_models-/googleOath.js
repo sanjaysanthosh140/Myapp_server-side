@@ -49,8 +49,10 @@ function (accessToken, refreshToken, profile, done) {
                     //console.log(data)
                     const newAuthusers = new google_Oauth_1.default(user);
                     result = yield newAuthusers.save();
-                    done(null, result);
-                    (0, Main_function_1.counter_mail)(result);
+                    if (result) {
+                        done(null, result);
+                        (0, Main_function_1.counter_mail)(result);
+                    }
                     //console.log(result);
                     // encodeToken = generateToken(result._id)
                 }));
