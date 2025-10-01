@@ -27,8 +27,8 @@ router
 
 router.route("/oauth2/redirect/google").get(
   passport.authenticate("google", {
-    successRedirect:"http://localhost:5173",
-    failureRedirect:"http://localhost:5173",
+    successRedirect:"https://client-side-24a22.web.app",
+    failureRedirect:"https://client-side-24a22.web.app",
     session: true,
     failureMessage: true,
   })
@@ -54,9 +54,9 @@ router
 
 router.route("/oauth3/github/callback").get(
   passport.authenticate("github",{
-    successRedirect:"http://localhost:5173",
+    successRedirect:"https://client-side-24a22.web.app",
     session: true,
-    failureRedirect:"http://localhost:5173",
+    failureRedirect:"https://client-side-24a22.web.app",
     failureMessage: true,
   })
 ); 
@@ -80,9 +80,7 @@ router.post('/newCart',new_Cart);
 //router.post('/payment',stripcall);
 
 //router.get('/wishList/:id',WishList);
-
 router.get('/retrive_wish/:id',getWishList);
-
 //router.delete("/delete_wish/:id",delete_Wish);
 
 module.exports = router;
