@@ -33,7 +33,7 @@ export const counter_mail = async (mail_name: any) => {
       
       // Resend email format (DIFFERENT from Nodemailer!)
       const { data, error } = await resend.emails.send({
-        from: 'Your SaaS <onboarding@resend.dev>', // Required field
+        from: 'sanjaykrishna038@gmail.com', // Required field
         to: email,
         subject: `Welcome to the Future, ${name}! Your AI Journey Begins Here`,
         html: html_doc,

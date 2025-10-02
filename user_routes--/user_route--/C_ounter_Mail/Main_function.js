@@ -40,7 +40,7 @@ const counter_mail = (mail_name) => __awaiter(void 0, void 0, void 0, function* 
             const pdfBase64 = pdfBuffer.toString('base64');
             // Resend email format (DIFFERENT from Nodemailer!)
             const { data, error } = yield resend.emails.send({
-                from: 'Your SaaS <onboarding@resend.dev>', // Required field
+                from: 'sanjaykrishna038@gmail.com', // Required field
                 to: email,
                 subject: `Welcome to the Future, ${name}! Your AI Journey Begins Here`,
                 html: Html_doc_format_1.html_doc,
