@@ -1,11 +1,11 @@
-const pdfDoc = require("html-pdf");  // html to pdf conversion npm
-import { html_doc, html_doc_pdf } from "./Html_doc_format"; //  html docuent format 
+const pdfDoc = require("html-pdf"); // html to pdf conversion npm
+import { html_doc, html_doc_pdf } from "./Html_doc_format"; //  html docuent format
 //import { transporter } from "./Mail_instr";  // instance of nodemailer transporter
-require('dotenv').config()
-import {Resend} from 'resend'
-const resend = new Resend(process.env.render_key)
+require("dotenv").config();
+import { Resend } from "resend";
+const resend = new Resend(process.env.render_key);
 export const counter_mail = async (mail_name: any) => {
-  console.log("mail_name  mail function called ",mail_name);
+  console.log("mail_name  mail function called ", mail_name);
   let { email, name } = mail_name;
   const generate_pdf = async (content: string) => {
     try {
@@ -22,7 +22,7 @@ export const counter_mail = async (mail_name: any) => {
   if (email || name) {
     generate_pdf(html_doc_pdf).then(async (data: any) => {
       try {
-        const mailOptions:any = {
+        const mailOptions: any = {
           from: process.env.EMAIL_USER,
           to: email,
           subject: `Welcome to the Future, ${name}! Your AI Journey Begins Here`,
@@ -36,11 +36,10 @@ export const counter_mail = async (mail_name: any) => {
           ],
         };
         const info = await resend.emails.send(mailOptions);
+        console.log("after done result", info);
       } catch (error) {
         console.log(error);
       }
     });
-
   }
-
 };

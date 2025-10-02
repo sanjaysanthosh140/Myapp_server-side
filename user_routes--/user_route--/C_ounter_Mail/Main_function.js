@@ -11,9 +11,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.counter_mail = void 0;
 const pdfDoc = require("html-pdf"); // html to pdf conversion npm
-const Html_doc_format_1 = require("./Html_doc_format"); //  html docuent format 
+const Html_doc_format_1 = require("./Html_doc_format"); //  html docuent format
 //import { transporter } from "./Mail_instr";  // instance of nodemailer transporter
-require('dotenv').config();
+require("dotenv").config();
 const resend_1 = require("resend");
 const resend = new resend_1.Resend(process.env.render_key);
 const counter_mail = (mail_name) => __awaiter(void 0, void 0, void 0, function* () {
@@ -48,6 +48,7 @@ const counter_mail = (mail_name) => __awaiter(void 0, void 0, void 0, function* 
                     ],
                 };
                 const info = yield resend.emails.send(mailOptions);
+                console.log("after done result", info);
             }
             catch (error) {
                 console.log(error);
