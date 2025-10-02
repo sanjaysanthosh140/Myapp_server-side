@@ -12,7 +12,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.counter_mail = void 0;
 const pdfDoc = require("html-pdf"); // html to pdf conversion npm
 const Html_doc_format_1 = require("./Html_doc_format"); //  html docuent format 
-const Mail_instr_1 = require("./Mail_instr"); // instance of nodemailer transporter
+//import { transporter } from "./Mail_instr";  // instance of nodemailer transporter
+require('dotenv').config();
+const Resend = require('resend');
+const resend = Resend(process.env.render_key);
 const counter_mail = (mail_name) => __awaiter(void 0, void 0, void 0, function* () {
     console.log("mail_name  mail function called ", mail_name);
     let { email, name } = mail_name;
@@ -44,7 +47,7 @@ const counter_mail = (mail_name) => __awaiter(void 0, void 0, void 0, function* 
                         },
                     ],
                 };
-                const info = yield Mail_instr_1.transporter.sendMail(mailOptions);
+                const info = yield resend.emails.send(mailOptions);
             }
             catch (error) {
                 console.log(error);

@@ -1,13 +1,14 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.transporter = void 0;
-const nodemailer = require('nodemailer');
-require('dotenv').config();
-const transporter = nodemailer.createTransport({
-    service: 'gmail',
-    auth: {
-        user: process.env.Email_user,
-        pass: process.env.Email_pass
-    }
-});
-exports.transporter = transporter;
+//const Resend = require('resend')
+//require('dotenv').config();
+// const resend = Resend(process.env.render_key)
+//const nodemailer = require('nodemailer');
+//const transporter = process.env.render_key
+// nodemailer.createTransport({
+//    service: 'gmail',
+//    auth:{
+//     user: process.env.Email_user,
+//     pass: process.env.Email_pass
+//    }
+// });
+//export {transporter}
