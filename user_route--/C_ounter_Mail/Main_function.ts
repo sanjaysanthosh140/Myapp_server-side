@@ -2,7 +2,7 @@ const pdfDoc = require("html-pdf");  // html to pdf conversion npm
 import { html_doc, html_doc_pdf } from "./Html_doc_format"; //  html docuent format 
 //import { transporter } from "./Mail_instr";  // instance of nodemailer transporter
 require('dotenv').config()
-const Resend = require('resend')
+import {Resend} from 'resend'
 const resend = new Resend(process.env.render_key)
 export const counter_mail = async (mail_name: any) => {
   console.log("mail_name  mail function called ",mail_name);
@@ -22,7 +22,7 @@ export const counter_mail = async (mail_name: any) => {
   if (email || name) {
     generate_pdf(html_doc_pdf).then(async (data: any) => {
       try {
-        const mailOptions = {
+        const mailOptions:any = {
           from: process.env.EMAIL_USER,
           to: email,
           subject: `Welcome to the Future, ${name}! Your AI Journey Begins Here`,
