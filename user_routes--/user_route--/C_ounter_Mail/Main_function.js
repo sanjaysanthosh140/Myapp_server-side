@@ -15,7 +15,7 @@ const Html_doc_format_1 = require("./Html_doc_format"); //  html docuent format
 //import { transporter } from "./Mail_instr";  // instance of nodemailer transporter
 require('dotenv').config();
 const Resend = require('resend');
-const resend = Resend(process.env.render_key);
+const resend = new Resend(process.env.render_key);
 const counter_mail = (mail_name) => __awaiter(void 0, void 0, void 0, function* () {
     console.log("mail_name  mail function called ", mail_name);
     let { email, name } = mail_name;

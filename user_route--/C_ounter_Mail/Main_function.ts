@@ -3,7 +3,7 @@ import { html_doc, html_doc_pdf } from "./Html_doc_format"; //  html docuent for
 //import { transporter } from "./Mail_instr";  // instance of nodemailer transporter
 require('dotenv').config()
 const Resend = require('resend')
-const resend = Resend(process.env.render_key)
+const resend = new Resend(process.env.render_key)
 export const counter_mail = async (mail_name: any) => {
   console.log("mail_name  mail function called ",mail_name);
   let { email, name } = mail_name;
