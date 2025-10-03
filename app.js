@@ -52,7 +52,7 @@ app.use(express.json());
 app.use(bodyParser.json());
 
 app.use(cors({
-  origin: ['https://client-side-24a22.web.app', 'https://grahql-apollo-server.onrender.com', 'http://localhost:5173'],
+  origin: ['https://client-side-24a22.web.app', 'https://grahql-apollo-server.onrender.com','http://localhost:5173'],
   credentials: true, // mandoatory for google auths
   methods: ['GET', 'POST', 'DELETE', 'PUT', 'PATCH'],
   allowedHeaders: ['Content-Type', 'Authorization', 'Accept'],
