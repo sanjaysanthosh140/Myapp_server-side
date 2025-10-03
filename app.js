@@ -21,24 +21,24 @@ app.use(session({
   resave: false,
   saveUninitialized: false,
   store: MongoStore.create({
-    mongoUrl:process.env.db_storage,
+    mongoUrl: process.env.db_storage,
     collectionName: 'sessions',
     ttl: 24 * 60 * 60 * 1000 // 24 hours
   }),
-  cookie:{
-    httpOnly:true,
-    secure:false,
-    sameSite:'lax',
-    maxAge:24*60*60*1000
+  cookie: {
+    httpOnly: true,
+    secure: false,
+    sameSite: 'lax',
+    maxAge: 24 * 60 * 60 * 1000
   }
 }));
 app.use(Passport.initialize());
 app.use(Passport.session())
 
 // app.use((req, res, next) => {
-  // console.log('Session ID:', req.sessionID);
-  // console.log('Session:', req.session);
-  // next();
+// console.log('Session ID:', req.sessionID);
+// console.log('Session:', req.session);
+// next();
 // });
 
 // routes
@@ -52,11 +52,11 @@ app.use(express.json());
 app.use(bodyParser.json());
 
 app.use(cors({
-  origin: ['https://client-side-24a22.web.app','https://grahql-apollo-server.onrender.com'],
+  origin: ['https://client-side-24a22.web.app', 'https://grahql-apollo-server.onrender.com', 'http://localhost:5173'],
   credentials: true, // mandoatory for google auths
   methods: ['GET', 'POST', 'DELETE', 'PUT', 'PATCH'],
   allowedHeaders: ['Content-Type', 'Authorization', 'Accept'],
-  exposedHeaders:['Access-Control-Allow-Origin'],
+  exposedHeaders: ['Access-Control-Allow-Origin'],
   exposedHeaders: ['Authorization'],
 }));
 
@@ -67,6 +67,6 @@ app.use('/user_side', user_Routes)
 app.use('/admin_side', admin_Routes)
 
 
-app.listen(port,'0.0.0.0', () => {
+app.listen(port, '0.0.0.0', () => {
   console.log("server is running on port 4000");
 })
