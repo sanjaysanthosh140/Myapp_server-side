@@ -13,7 +13,14 @@ interface tokenDecode {
 export const new_Cart = async (req: Request, res: Response) => {
   // fuction start
   console.log(req.body);
-
+  console.log("=== NEW CART REQUEST DEBUG ===");
+  console.log("Cookies received:", req.headers.cookie || "NO COOKIES");
+  console.log("Authorization header:", req.headers.authorization || "NO TOKEN");
+  console.log("Session ID:", req.sessionID);
+  console.log("User authenticated:", req.isAuthenticated());
+  console.log("User:", req.user);
+  console.log("Request body:", req.body);
+  console.log("=== END DEBUG ===");
   //const prod_id: any = req.params.id;
   const items = [
     {
@@ -24,17 +31,17 @@ export const new_Cart = async (req: Request, res: Response) => {
   ];
 
   const token = req.headers.authorization; // extrqct token from req
-   const cookie = req.headers
-   if(cookie){
-   console.log(cookie);
-   }
+  const cookie = req.headers;
+  if (cookie) {
+    console.log(cookie);
+  }
   if (req.isAuthenticated() || token) {
     // check req is authorizer by token or Oauth2
 
     const user: any = req.user;
     console.log("callCaetFun", user);
     if (req.isAuthenticated() && req.body.toolCategory) {
-      console.log("checking authentication in saving tools")
+      console.log("checking authentication in saving tools");
       // become true it goes to procegure
       let response: any = await add_to_cart(user._id, items); //
       console.log(response);
@@ -66,8 +73,8 @@ export const new_Cart = async (req: Request, res: Response) => {
         }
       );
     }
-  }else{
-    console.log("both are missing , savetools")
+  } else {
+    console.log("both are missing , savetools");
   }
 };
 

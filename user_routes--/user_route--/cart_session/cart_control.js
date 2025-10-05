@@ -20,6 +20,14 @@ const jwt = require("jsonwebtoken");
 const new_Cart = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     // fuction start
     console.log(req.body);
+    console.log("=== NEW CART REQUEST DEBUG ===");
+    console.log("Cookies received:", req.headers.cookie || "NO COOKIES");
+    console.log("Authorization header:", req.headers.authorization || "NO TOKEN");
+    console.log("Session ID:", req.sessionID);
+    console.log("User authenticated:", req.isAuthenticated());
+    console.log("User:", req.user);
+    console.log("Request body:", req.body);
+    console.log("=== END DEBUG ===");
     //const prod_id: any = req.params.id;
     const items = [
         {
