@@ -29,6 +29,10 @@ const new_Cart = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         },
     ];
     const token = req.headers.authorization; // extrqct token from req
+    const cookie = req.headers;
+    if (cookie) {
+        console.log(cookie);
+    }
     if (req.isAuthenticated() || token) {
         // check req is authorizer by token or Oauth2
         const user = req.user;
