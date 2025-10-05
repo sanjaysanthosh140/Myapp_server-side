@@ -25,7 +25,9 @@ export const new_Cart = async (req: Request, res: Response) => {
 
   const token = req.headers.authorization; // extrqct token from req
    const cookie = req.headers
+   if(cookie){
    console.log(cookie);
+   }
   if (req.isAuthenticated() || token) {
     // check req is authorizer by token or Oauth2
 
