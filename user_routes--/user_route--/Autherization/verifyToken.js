@@ -14,6 +14,7 @@ const jwt = require("jsonwebtoken");
 const verifyToken = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     console.log("call reach here");
     console.log("isAuth", req.isAuthenticated());
+    console.log("oauth2 user", req.user);
     // console.log("headers", req.headers);
     // console.log("cookie", req.cookies);
     let token = yield req.headers["authorization"];
@@ -55,7 +56,7 @@ const verifyToken = (req, res, next) => __awaiter(void 0, void 0, void 0, functi
             });
         }
         else {
-            console.log('oauth and token empity');
+            console.log("oauth and token empity");
             res.setHeader("Content-Type", "application/json");
             return res.json({
                 isAuthenticate: false,

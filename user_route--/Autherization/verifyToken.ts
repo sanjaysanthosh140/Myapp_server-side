@@ -8,7 +8,8 @@ interface IUser {
 }
 const verifyToken = async (req: Request, res: Response, next: NextFunction) => {
   console.log("call reach here");
-   console.log("isAuth", req.isAuthenticated());
+  console.log("isAuth", req.isAuthenticated());
+  console.log("oauth2 user", req.user);
   // console.log("headers", req.headers);
   // console.log("cookie", req.cookies);
 
@@ -20,7 +21,7 @@ const verifyToken = async (req: Request, res: Response, next: NextFunction) => {
       // console.log("headers", req.headers);
       // console.log("cookie", req.cookies);
       // console.log("reach isAuth()",req.isAuthenticated());
-      const user:any = req.user;
+      const user: any = req.user;
       res.setHeader("Content-Type", "application/json");
       return res.json({
         isAuthenticate: true,
@@ -49,7 +50,7 @@ const verifyToken = async (req: Request, res: Response, next: NextFunction) => {
         }
       });
     } else {
-      console.log('oauth and token empity')
+      console.log("oauth and token empity");
       res.setHeader("Content-Type", "application/json");
       return res.json({
         isAuthenticate: false,
