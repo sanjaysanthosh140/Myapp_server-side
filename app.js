@@ -19,26 +19,20 @@ mongo_Connection();
 // Add error handling for MongoStore
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
-
 app.use(session({
-  secret: process.env.SESSION_SECRET || 'secrete', // Use env variable
+  secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: false,
   store: MongoStore.create({
     mongoUrl: process.env.db_storage,
     collectionName: 'sessions',
-    ttl: 24 * 60 * 60, // 24 hours in seconds (correct format)
-    autoRemove: 'native', // Optional
-    mongoOptions: {
-      useNewUrlParser: true,
-      useUnifiedTopology: true
-    }
   }),
   cookie: {
-    httpsOnly: true,
-    secure: false, // Set to true in production with HTTPS
-    sameSite: 'lax',
-    maxAge: 24 * 60 * 60 * 1000
+    httpOnly: true,    // ✅ CHANGE: httpsOnly → httpOnly
+    secure: true,      
+    sameSite: 'none',  
+    maxAge: 24 * 60 * 60 * 1000,
+    domain: '.onrender.com' // ✅ ADD THIS for cross-origin
   }
 }));
 app.use(Passport.initialize());
