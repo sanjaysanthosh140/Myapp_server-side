@@ -36,8 +36,8 @@ app.use(session({
   }),
   cookie: {
     httpOnly: true,
-    secure: false, // Set to true in production with HTTPS
-    sameSite: 'lax',
+    secure: true, // Set to true in production with HTTPS
+    sameSite:  'none',
     maxAge: 24 * 60 * 60 * 1000
   }
 }));
@@ -64,9 +64,8 @@ app.use(cors({
   origin: ['https://saastoola-b3f60.web.app', 'https://grahql-apollo-server.onrender.com'],
   credentials: true, // mandoatory for google auths
   methods: ['GET', 'POST', 'DELETE', 'PUT', 'PATCH'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'Accept'],
-  exposedHeaders: ['Access-Control-Allow-Origin'],
-  exposedHeaders: ['Authorization'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'Cookie', 'Set-Cookie'],
+  exposedHeaders: ['Set-Cookie', 'Authorization'],
 }));
 
 
