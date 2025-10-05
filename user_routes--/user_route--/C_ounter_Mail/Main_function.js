@@ -1,4 +1,4 @@
-"use strict";
+//"use strict";
 // const pdfDoc = require("html-pdf");
 // import { html_doc, html_doc_pdf } from "./Html_doc_format";
 // require("dotenv").config();
