@@ -27,8 +27,8 @@ router
 
 router.route("/oauth2/redirect/google").get(
   passport.authenticate("google", {
-    successRedirect:"https://saastoola-b3f60.web.app",
-    failureRedirect:"https://saastoola-b3f60.web.app/signup",
+    successRedirect:"https://client-side-24a22.web.app",
+    failureRedirect:"https://client-side-24a22.web.app/signup",
     session: true,
     failureMessage: true,
   })
@@ -54,9 +54,9 @@ router
 
 router.route("/oauth3/github/callback").get(
   passport.authenticate("github",{
-    successRedirect:"https://saastoola-b3f60.web.app",
+    successRedirect:"https://client-side-24a22.web.app",
     session: true,
-    failureRedirect:"https://saastoola-b3f60.web.app/signup",
+    failureRedirect:"https://client-side-24a22.web.app/signup",
     failureMessage: true,
   })
 ); 
