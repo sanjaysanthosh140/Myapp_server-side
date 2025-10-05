@@ -17,7 +17,7 @@ mongo_Connection();
 
 const route = express.Router();
 app.use(session({
-  secret: process.env.session_secret,
+  secret:'secrete',
   resave: false,
   saveUninitialized: false,
   store: MongoStore.create({
