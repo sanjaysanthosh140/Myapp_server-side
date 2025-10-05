@@ -27,8 +27,8 @@ router
 
 router.route("/oauth2/redirect/google").get(
   passport.authenticate("google", {
-    successRedirect:"https://client-side-24a22.web.app",
-    failureRedirect:"https://client-side-24a22.web.app/signup",
+    successRedirect:"http://localhost:5173",
+    failureRedirect:"http://localhost:5173/signup",
     session: true,
     failureMessage: true,
   })
@@ -54,9 +54,9 @@ router
 
 router.route("/oauth3/github/callback").get(
   passport.authenticate("github",{
-    successRedirect:"https://client-side-24a22.web.app",
+    successRedirect:"http://localhost:5173",
     session: true,
-    failureRedirect:"https://client-side-24a22.web.app/signup",
+    failureRedirect:"http://localhost:5173/signup",
     failureMessage: true,
   })
 ); 
