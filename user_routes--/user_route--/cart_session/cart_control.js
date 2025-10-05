@@ -66,6 +66,9 @@ const new_Cart = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             }));
         }
     }
+    else {
+        console.log("both are missing , savetools");
+    }
 });
 exports.new_Cart = new_Cart;
 // export const frv_cart = async (req: Request, res: Response) => {
