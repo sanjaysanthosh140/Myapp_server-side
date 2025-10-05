@@ -44,11 +44,11 @@ app.use(session({
 app.use(Passport.initialize());
 app.use(Passport.session())
 
-// app.use((req, res, next) => {
-// console.log('Session ID:', req.sessionID);
-// console.log('Session:', req.session);
-// next();
-// });
+app.use((req, res, next) => {
+console.log('Session ID:', req.sessionID);
+console.log('Session:', req.session);
+next();
+});
 
 // routes
 const user_Routes = require('./user_routes--/user_route--/user_route.js');
