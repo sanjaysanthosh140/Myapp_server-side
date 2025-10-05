@@ -34,6 +34,7 @@ const new_Cart = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         const user = req.user;
         console.log("callCaetFun", user);
         if (req.isAuthenticated() && req.body.toolCategory) {
+            console.log("checking authentication in saving tools");
             // become true it goes to procegure
             let response = yield (0, Cart_method_1.add_to_cart)(user._id, items); //
             console.log(response);

@@ -31,6 +31,7 @@ export const new_Cart = async (req: Request, res: Response) => {
     const user: any = req.user;
     console.log("callCaetFun", user);
     if (req.isAuthenticated() && req.body.toolCategory) {
+      console.log("checking authentication in saving tools")
       // become true it goes to procegure
       let response: any = await add_to_cart(user._id, items); //
       console.log(response);
