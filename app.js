@@ -16,18 +16,27 @@ require('dotenv').config();
 mongo_Connection();
 
 const route = express.Router();
+// Add error handling for MongoStore
+const session = require('express-session');
+const MongoStore = require('connect-mongo');
+
 app.use(session({
-  secret:'secrete',
+  secret: process.env.SESSION_SECRET || 'secrete', // Use env variable
   resave: false,
   saveUninitialized: false,
   store: MongoStore.create({
     mongoUrl: process.env.db_storage,
     collectionName: 'sessions',
-    ttl: 24 * 60 * 60 * 1000 // 24 hours
+    ttl: 24 * 60 * 60, // 24 hours in seconds (correct format)
+    autoRemove: 'native', // Optional
+    mongoOptions: {
+      useNewUrlParser: true,
+      useUnifiedTopology: true
+    }
   }),
   cookie: {
     httpOnly: true,
-    secure: false,
+    secure: false, // Set to true in production with HTTPS
     sameSite: 'lax',
     maxAge: 24 * 60 * 60 * 1000
   }
