@@ -8,7 +8,7 @@ interface IUser {
 }
 const verifyToken = async (req: Request, res: Response, next: NextFunction) => {
   console.log("call reach here");
-  // console.log("isAuth", req.isAuthenticated());
+   console.log("isAuth", req.isAuthenticated());
   // console.log("headers", req.headers);
   // console.log("cookie", req.cookies);
 

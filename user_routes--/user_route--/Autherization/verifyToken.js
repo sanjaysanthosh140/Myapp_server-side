@@ -13,7 +13,7 @@ exports.verifyToken = void 0;
 const jwt = require("jsonwebtoken");
 const verifyToken = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     console.log("call reach here");
-    // console.log("isAuth", req.isAuthenticated());
+    console.log("isAuth", req.isAuthenticated());
     // console.log("headers", req.headers);
     // console.log("cookie", req.cookies);
     let token = yield req.headers["authorization"];
