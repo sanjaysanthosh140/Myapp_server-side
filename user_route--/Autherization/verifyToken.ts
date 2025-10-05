@@ -49,6 +49,7 @@ const verifyToken = async (req: Request, res: Response, next: NextFunction) => {
         }
       });
     } else {
+      console.log('oauth and token empity')
       res.setHeader("Content-Type", "application/json");
       return res.json({
         isAuthenticate: false,

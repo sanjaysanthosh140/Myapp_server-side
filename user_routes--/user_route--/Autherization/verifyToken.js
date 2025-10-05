@@ -55,6 +55,7 @@ const verifyToken = (req, res, next) => __awaiter(void 0, void 0, void 0, functi
             });
         }
         else {
+            console.log('oauth and token empity');
             res.setHeader("Content-Type", "application/json");
             return res.json({
                 isAuthenticate: false,
