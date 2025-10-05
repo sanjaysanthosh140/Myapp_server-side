@@ -35,11 +35,11 @@ app.use(session({
     }
   }),
   cookie: {
-    httpsOnly: true,
-    secure: true, // Set to true in production with HTTPS
-    sameSite:  'none',
-    maxAge: 24 * 60 * 60 * 1000
-  }
+  httpOnly: true,    // ✅ Prevents XSS attacks
+  secure: true,      // ✅ Required for HTTPS
+  sameSite: 'none',  // ✅ Required for cross-origin
+  maxAge: 24 * 60 * 60 * 1000
+}
 }));
 app.use(Passport.initialize());
 app.use(Passport.session())
