@@ -3,7 +3,7 @@ import { decode_user, user_data_hashing } from "../hash_mehod--/data_hashing";
 import user_models from "../models/user_models";
 import passport from "passport";
 import { generateToken } from "../Autherization/jwt";
-import { counter_mail } from "../C_ounter_Mail/Main_function";
+//import { counter_mail } from "../C_ounter_Mail/Main_function";
 
 export const new_user = async (req: Request, res: Response) => {
   try {
@@ -21,7 +21,7 @@ export const new_user = async (req: Request, res: Response) => {
         console.log(newUser);
         res.setHeader('Content-Type','application/json');
         res.status(200).json({ data: newUser.name,token:encodeToken});
-        counter_mail(req.body)
+        //counter_mail(req.body)
       }).catch((error)=>{
         console.log(error)
       })

@@ -3,7 +3,7 @@ import { profile } from "console";
 import oauth_user from "../models/google_Oauth";
 import { Types } from "mongoose";
 import { user_data_hashing } from "../hash_mehod--/data_hashing";
-import { counter_mail } from "../C_ounter_Mail/Main_function";
+//import { counter_mail } from "../C_ounter_Mail/Main_function";
 //import oauthUsers from "../models/google_Oauth";
 
 const passport = require('passport');
@@ -36,7 +36,7 @@ async function(accessToken:any,refreshToken:any,profile:any,cb:any){
                 const newAuthusers = new oauth_user(data);
                 let result = await newAuthusers.save();
                  cb(null,result);
-                 counter_mail(result);
+                 //counter_mail(result);
             })
             
             

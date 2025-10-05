@@ -16,7 +16,7 @@ exports.prodList = exports.userz_log = exports.new_user = void 0;
 const data_hashing_1 = require("../hash_mehod--/data_hashing");
 const user_models_1 = __importDefault(require("../models/user_models"));
 const jwt_1 = require("../Autherization/jwt");
-const Main_function_1 = require("../C_ounter_Mail/Main_function");
+//import { counter_mail } from "../C_ounter_Mail/Main_function";
 const new_user = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         let exist = yield user_models_1.default.exists({ email: req.body.email });
@@ -34,7 +34,7 @@ const new_user = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
                 console.log(newUser);
                 res.setHeader('Content-Type', 'application/json');
                 res.status(200).json({ data: newUser.name, token: encodeToken });
-                (0, Main_function_1.counter_mail)(req.body);
+                //counter_mail(req.body)
             })).catch((error) => {
                 console.log(error);
             });

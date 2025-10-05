@@ -5,7 +5,7 @@ import { user_data_hashing } from "../hash_mehod--/data_hashing";
 import { generateToken } from "../Autherization/jwt";
 import { Types } from "mongoose";
 import git_user from "../models/git_Oauth";
-import { counter_mail } from "../C_ounter_Mail/Main_function";
+//import { counter_mail } from "../C_ounter_Mail/Main_function";
 require("dotenv").config();
 //let encodeToken:null;
 let result: any;
@@ -47,7 +47,7 @@ passport.use(
             result = await newAuthusers.save();
             if (result) {
               done(null, result);
-              counter_mail(result);
+              //counter_mail(result);
             }
             //console.log(result);
             // encodeToken = generateToken(result._id)
