@@ -28,11 +28,10 @@ app.use(session({
     collectionName: 'sessions',
   }),
   cookie: {
-    httpOnly: true,    // ✅ CHANGE: httpsOnly → httpOnly
-    secure: true,      
-    sameSite: 'none',  
-    maxAge: 24 * 60 * 60 * 1000,
-    domain: '.onrender.com' // ✅ ADD THIS for cross-origin
+    httpsOnly: true,
+    secure: false, // Set to true in production with HTTPS
+    sameSite: 'lax',
+    maxAge: 24 * 60 * 60 * 1000
   }
 }));
 app.use(Passport.initialize());
@@ -55,7 +54,7 @@ app.use(express.json());
 app.use(bodyParser.json());
 
 app.use(cors({
-  origin: ['https://saastoola-b3f60.web.app', 'https://grahql-apollo-server.onrender.com'],
+  origin: ['https://client-side-24a22.web.app', 'https://grahql-apollo-server.onrender.com'],
   credentials: true, // mandoatory for google auths
   methods: ['GET', 'POST', 'DELETE', 'PUT', 'PATCH'],
   allowedHeaders: ['Content-Type', 'Authorization', 'Cookie', 'Set-Cookie'],
