@@ -54,7 +54,7 @@ app.use(express.json());
 app.use(bodyParser.json());
 
 app.use(cors({
-  origin: ['http://localhost:5173', 'https://grahql-apollo-server.onrender.com'],
+  origin: ['https://saastoola-b3f60.web.app', 'https://grahql-apollo-server.onrender.com'],
   credentials: true, // mandoatory for google auths
   methods: ['GET', 'POST', 'DELETE', 'PUT', 'PATCH'],
   allowedHeaders: ['Content-Type', 'Authorization', 'Cookie', 'Set-Cookie'],
