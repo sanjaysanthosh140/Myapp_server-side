@@ -36,7 +36,7 @@ function (accessToken, refreshToken, profile, done) {
                 email: profile.emails[0].value,
             });
             if (userIn) {
-               // console.log('userIn',userIn)
+                //console.log('userIn',userIn)
                 done(null, userIn);
             }
             else {
@@ -50,8 +50,9 @@ function (accessToken, refreshToken, profile, done) {
                     const newAuthusers = new google_Oauth_1.default(user);
                     result = yield newAuthusers.save();
                     if (result) {
+                        consoel.log("from google oauth", result);
                         done(null, result);
-                        //console.log("oauth2 result"result);
+                        //counter_mail(result);
                     }
                     //console.log(result);
                     // encodeToken = generateToken(result._id)

@@ -21,8 +21,8 @@ router
     prompt: "consent",
 }));
 router.route("/oauth2/redirect/google").get(passport.authenticate("google", {
-    successRedirect: "http://localhost:5173",
-    failureRedirect: "http://localhost:5173/signup",
+    successRedirect: "https://saastoola-b3f60.web.app",
+    failureRedirect: "https://saastoola-b3f60.web.app/signup",
     session: true,
     failureMessage: true,
 }));
@@ -42,9 +42,9 @@ router
     access_type: "online",
 }));
 router.route("/oauth3/github/callback").get(passport.authenticate("github", {
-    successRedirect: "http://localhost:5173",
+    successRedirect: "https://saastoola-b3f60.web.app",
     session: true,
-    failureRedirect: "http://localhost:5173/signup",
+    failureRedirect: "https://saastoola-b3f60.web.app/signup",
     failureMessage: true,
 }));
 // router.get("/products", async (req: Request, res: Response) => {
