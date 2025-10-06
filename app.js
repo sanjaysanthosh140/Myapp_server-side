@@ -19,21 +19,21 @@ mongo_Connection();
 // Add error handling for MongoStore
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
-app.use(session({
-  secret: process.env.session_secret||"secret",
-  resave: false,
-  saveUninitialized: false,
-  store: MongoStore.create({
-    mongoUrl: process.env.db_storage,
-    collectionName: 'sessions',
-  }),
-  cookie: {
-    httpsOnly: true,
-    secure: false, // Set to true in production with HTTPS
-    sameSite: 'lax',
-    maxAge: 24 * 60 * 60 * 1000
-  }
-}));
+// app.use(session({
+//   secret: process.env.session_secret||"secret",
+//   resave: false,
+//   saveUninitialized: false,
+//   store: MongoStore.create({
+//     mongoUrl: process.env.db_storage,
+//     collectionName: 'sessions',
+//   }),
+//   cookie: {
+//     httpsOnly: true,
+//     secure: false, // Set to true in production with HTTPS
+//     sameSite: 'lax',
+//     maxAge: 24 * 60 * 60 * 1000
+//   }
+// }));
 app.use(Passport.initialize());
 app.use(Passport.session())
 
