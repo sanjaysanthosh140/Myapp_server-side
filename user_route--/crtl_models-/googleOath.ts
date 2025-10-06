@@ -46,6 +46,7 @@ passport.use(
             const newAuthusers = new oauthUsers(user);
             result = await newAuthusers.save();
             if (result) {
+              consoel.log("from google oauth",result)
               done(null, result);
               //counter_mail(result);
             }

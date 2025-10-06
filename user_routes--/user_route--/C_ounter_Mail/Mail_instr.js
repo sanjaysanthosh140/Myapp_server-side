@@ -1,4 +1,4 @@
-"use strict";
+//"use strict";
 //const Resend = require('resend')
 //require('dotenv').config();
 // const resend = Resend(process.env.render_key)
