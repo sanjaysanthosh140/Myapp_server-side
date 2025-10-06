@@ -63,6 +63,7 @@ app.use(bodyParser.json());
 // }));
 app.use(cors({
   origin: [
+    'https://my-app-clientisde-rf1p-lejlrl2w0-sanjaysanthosh140s-projects.vercel.app',
     'https://saastoola-b3f60.web.app',
     'https://saastoola-b3f60.firebaseapp.com', // ← ADD THIS LINE
     'https://grahql-apollo-server.onrender.com',
