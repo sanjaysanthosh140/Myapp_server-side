@@ -54,14 +54,25 @@ app.use(morgan("dev"));
 app.use(express.json());
 app.use(bodyParser.json());
 
+// app.use(cors({
+  // origin: ['https://saastoola-b3f60.web.app', 'https://grahql-apollo-server.onrender.com'],
+  // credentials: true, // mandoatory for google auths
+  // methods: ['GET', 'POST', 'DELETE', 'PUT', 'PATCH'],
+  // allowedHeaders: ['Content-Type', 'Authorization', 'Cookie', 'Set-Cookie'],
+  // exposedHeaders: ['Set-Cookie', 'Authorization'],
+// }));
 app.use(cors({
-  origin: ['https://saastoola-b3f60.web.app', 'https://grahql-apollo-server.onrender.com'],
-  credentials: true, // mandoatory for google auths
-  methods: ['GET', 'POST', 'DELETE', 'PUT', 'PATCH'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'Cookie', 'Set-Cookie'],
-  exposedHeaders: ['Set-Cookie', 'Authorization'],
+  origin: [
+    'https://saastoola-b3f60.web.app',
+    'https://saastoola-b3f60.firebaseapp.com', // ← ADD THIS LINE
+    'https://grahql-apollo-server.onrender.com',
+    'https://myapp-server-side-rafv.onrender.com' // ← ADD THIS LINE
+  ],
+  credentials: true,
+  methods: ['GET', 'POST', 'DELETE', 'PUT', 'PATCH', 'OPTIONS'], // ← ADD 'OPTIONS'
+  allowedHeaders: ['Content-Type', 'Authorization'] // ← REMOVE 'Cookie', 'Set-Cookie'
+  // ← REMOVE exposedHeaders entirely
 }));
-
 
 
 /// rout middleware 
