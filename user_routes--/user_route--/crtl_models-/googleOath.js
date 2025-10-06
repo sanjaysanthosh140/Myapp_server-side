@@ -50,7 +50,7 @@ function (accessToken, refreshToken, profile, done) {
                     const newAuthusers = new google_Oauth_1.default(user);
                     result = yield newAuthusers.save();
                     if (result) {
-                        consoel.log("from google oauth", result);
+                        console.log("from google oauth", result);
                         done(null, result);
                         //counter_mail(result);
                     }
