@@ -35,7 +35,7 @@ app.use(session({
   }),
   cookie: {
     httpOnly: true,
-    secure: ture, // Set to true in production with HTTPS
+    secure: true, // Set to true in production with HTTPS
     //sameSite: 'lax',
     maxAge: 24 * 60 * 60 * 1000
   }
