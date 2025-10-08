@@ -9,8 +9,9 @@ import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 import { mongo_Connection } from "./user_routes--/user_route--/DB/connection.js";
 
-import google from "./user_routes--/user_route--/crtl_models-/googleOath.js";
-import github from "./user_routes--/user_route--/crtl_models-/githubOauht.js";
+import * as google from "./user_routes--/user_route--/crtl_models-/googleOath.js";
+import * as github from "./user_routes--/user_route--/crtl_models-/githubOauht.js";
+
 import verifyToken from "./user_routes--/user_route--/Autherization/verifyToken.js";
 import new_Cart from "./user_routes--/user_route--/cart_session/cart_control.js";
 import user_Routes from "./user_routes--/user_route--/user_route.js";
@@ -20,17 +21,16 @@ dotenv.config();
 const app = express();
 const port = process.env.PORT || 4000;
 
-// 🧠 Mongo connection
+// 🧠 Connect MongoDB
 mongo_Connection();
 
 // ----------------------------------------
-// 1️⃣ VERY IMPORTANT — TRUST RENDER PROXY
+// 1️⃣ TRUST PROXY — Required for Render HTTPS cookies
 // ----------------------------------------
-app.set("trust proxy", 1); 
-// Without this, secure cookies are silently dropped behind Render’s proxy
+app.set("trust proxy", 1);
 
 // ----------------------------------------
-// 2️⃣ BASIC MIDDLEWARE
+// 2️⃣ MIDDLEWARE
 // ----------------------------------------
 app.use(express.json());
 app.use(bodyParser.json());
@@ -38,7 +38,7 @@ app.use(cookieParser());
 app.use(morgan("dev"));
 
 // ----------------------------------------
-// 3️⃣ CORS CONFIGURATION
+// 3️⃣ CORS CONFIGURATION — allow Firebase ↔ Render communication
 // ----------------------------------------
 const allowedOrigins = [
   "https://saastoola-b3f60.web.app",
@@ -56,7 +56,7 @@ app.use(
 );
 
 // ----------------------------------------
-// 4️⃣ SESSION CONFIGURATION — FIXED
+// 4️⃣ EXPRESS SESSION (OAuth2 USERS)
 // ----------------------------------------
 app.use(
   session({
@@ -66,19 +66,19 @@ app.use(
     store: MongoStore.create({
       mongoUrl: process.env.db_storage,
       collectionName: "sessions",
-      ttl: 24 * 60 * 60,
+      ttl: 24 * 60 * 60, // 24 hours
     }),
     cookie: {
-      httpOnly: true,      // can't read from JS
-      secure: true,        // only send over HTTPS
-      sameSite: "none",    // required for cross-site cookies
-      maxAge: 24 * 60 * 60 * 1000, // 1 day
+      httpOnly: true,    // hides from JS
+      secure: true,      // HTTPS only
+      sameSite: "none",  // allow cross-site cookies
+      maxAge: 24 * 60 * 60 * 1000,
     },
   })
 );
 
 // ----------------------------------------
-// 5️⃣ PASSPORT (OAuth2) INITIALIZATION
+// 5️⃣ PASSPORT INITIALIZATION
 // ----------------------------------------
 app.use(passport.initialize());
 app.use(passport.session());
@@ -90,13 +90,13 @@ app.use("/uploads", express.static("uploads"));
 app.use("/user_side", user_Routes);
 app.use("/admin_side", admin_Routes);
 
-// OAuth callback routes
-app.use("/auth/google", google);
-app.use("/auth/github", github);
+// ✅ OAuth Routers (handle Google & GitHub login)
+app.use("/auth/google", google.default || google);
+app.use("/auth/github", github.default || github);
 
 // ----------------------------------------
-// 7️⃣ START SERVER
+// 7️⃣ SERVER START
 // ----------------------------------------
 app.listen(port, "0.0.0.0", () => {
-  console.log(`✅ Server running on port ${port}`);
+  console.log(`✅ Server running securely on port ${port}`);
 });
