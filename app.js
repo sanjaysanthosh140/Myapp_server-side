@@ -20,18 +20,23 @@ mongo_Connection();
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
 app.use(session({
-  secret: process.env.session_secret || "secret",
-  resave: true,  // Important for OAuth
+  secret: process.env.SESSION_SECRET || 'secrete', // Use env variable
+  resave: false,
   saveUninitialized: false,
   store: MongoStore.create({
     mongoUrl: process.env.db_storage,
     collectionName: 'sessions',
+    ttl: 24 * 60 * 60, // 24 hours in seconds (correct format)
+    autoRemove: 'native', // Optional
+    mongoOptions: {
+      useNewUrlParser: true,
+      useUnifiedTopology: true
+    }
   }),
   cookie: {
-    httpOnly: true,  // ✅ CORRECT property name
-    secure: true,    // ✅ TRUE for production (Firebase uses HTTPS)
-    sameSite: 'none', // ✅ 'none' for cross-domain (Firebase ↔ Render)
-    domain: '.onrender.com', // ✅ Critical for cross-domain cookies
+    httpsOnly: true,
+    secure: false, // Set to true in production with HTTPS
+    sameSite: 'lax',
     maxAge: 24 * 60 * 60 * 1000
   }
 }));
