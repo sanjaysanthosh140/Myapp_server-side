@@ -9,6 +9,17 @@ import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 import { mongo_Connection } from "./user_routes--/user_route--/DB/connection.js";
 
+const Passport = require('passport');
+const passport = require('./user_routes--/user_route--/crtl_models-/googleOath.js')
+//const { mongo_Connection } = require('./user_routes--/user_route--/DB/connection.js');
+const github = require('./user_routes--/user_route--/crtl_models-/githubOauht.js');
+//const MongoStore = require('connect-mongo');
+//const session = require('express-session');
+const verifyToken = require('./user_routes--/user_route--/Autherization/verifyToken.js');
+const new_Cart = require('./user_routes--/user_route--/cart_session/cart_control.js');
+
+
+
 dotenv.config();
 const app = express();
 const port = process.env.PORT || 4000;
