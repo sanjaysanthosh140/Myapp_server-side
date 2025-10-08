@@ -34,20 +34,20 @@ app.use(session({
     }
   }),
   cookie: {
-    httpsOnly: true,
-    secure: false, // Set to true in production with HTTPS
-    sameSite: 'lax',
+    httpOnly: true,
+    secure: ture, // Set to true in production with HTTPS
+    //sameSite: 'lax',
     maxAge: 24 * 60 * 60 * 1000
   }
 }));
 app.use(Passport.initialize());
 app.use(Passport.session())
 
-// app.use((req, res, next) => {
-// console.log('Session ID:', req.sessionID);
-// console.log('Session:', req.session);
-// next();
-// });
+app.use((req, res, next) => {
+console.log('###############Session ID:', req.sessionID);
+console.log('##############Session:', req.session);
+next();
+});
 
 // routes
 const user_Routes = require('./user_routes--/user_route--/user_route.js');
@@ -68,7 +68,6 @@ app.use(bodyParser.json());
 // }));
 app.use(cors({
   origin: [
-    'https://my-app-clientisde-rf1p-lejlrl2w0-sanjaysanthosh140s-projects.vercel.app',
     'https://saastoola-b3f60.web.app',
     'https://saastoola-b3f60.firebaseapp.com', // ← ADD THIS LINE
     'https://grahql-apollo-server.onrender.com',
