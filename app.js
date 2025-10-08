@@ -10,7 +10,7 @@ import cookieParser from "cookie-parser";
 import { mongo_Connection } from "./user_routes--/user_route--/DB/connection.js";
 
 const Passport = require('passport');
-const passport = require('./user_routes--/user_route--/crtl_models-/googleOath.js')
+const google = require('./user_routes--/user_route--/crtl_models-/googleOath.js')
 //const { mongo_Connection } = require('./user_routes--/user_route--/DB/connection.js');
 const github = require('./user_routes--/user_route--/crtl_models-/githubOauht.js');
 //const MongoStore = require('connect-mongo');
