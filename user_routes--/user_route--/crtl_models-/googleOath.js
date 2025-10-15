@@ -63,6 +63,7 @@ function (accessToken, refreshToken, profile, done) {
 }));
 passport.serializeUser((result, done) => {
     //console.log('Serializing user ID:', result._id);
+    console.log("debugging_serialization token jwt during oath process", result.id);
     const userId = result._id.toString();
     // console.log(userId)
     done(null, userId); // Pass just the ID

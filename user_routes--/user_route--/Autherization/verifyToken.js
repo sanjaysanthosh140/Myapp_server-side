@@ -12,27 +12,23 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.verifyToken = void 0;
 const jwt = require("jsonwebtoken");
 const verifyToken = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    console.log("call reach here");
-    console.log("isAuth", req.isAuthenticated());
-    console.log("oauth2 user", req.user);
-    // console.log("headers", req.headers);
-    // console.log("cookie", req.cookies);
-    let token = yield req.headers["authorization"];
     try {
-        if (req.isAuthenticated()) {
-            console.log("working in Oauth");
-            // console.log("isAuth", req.isAuthenticated());
-            // console.log("headers", req.headers);
-            // console.log("cookie", req.cookies);
-            // console.log("reach isAuth()",req.isAuthenticated());
-            const user = req.user;
-            res.setHeader("Content-Type", "application/json");
-            return res.json({
-                isAuthenticate: true,
-                user_id: user._id,
-            });
-        }
-        else if (token !== "null") {
+        console.log("call reach here");
+        let token = yield req.headers["authorization"];
+        //console.log("isAuth", req.isAuthenticated());
+        //console.log("oauth2 user", req.user);
+        // console.log("headers", req.headers);
+        // console.log("cookie", req.cookies);
+        // if (req.isAuthenticated()) {
+        //   console.log("working in Oauth");
+        //   const user: any = req.user;
+        //   res.setHeader("Content-Type", "application/json");
+        //   return res.json({
+        //     isAuthenticate: true,
+        //     user_id: user._id,
+        //   });
+        // } 
+        if (token !== "null") {
             console.log("token", token);
             //if (token) {
             jwt.verify(token, "my_secret_key", (err, encode) => {
@@ -56,7 +52,7 @@ const verifyToken = (req, res, next) => __awaiter(void 0, void 0, void 0, functi
             });
         }
         else {
-            console.log("oauth and token empity");
+            //console.log("oauth and token empity");
             res.setHeader("Content-Type", "application/json");
             return res.json({
                 isAuthenticate: false,

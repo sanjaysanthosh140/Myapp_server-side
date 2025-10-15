@@ -50,8 +50,9 @@ else{
 ))
 
 passport.serializeUser(function(result:any,done:any){
+    console.log("debugging_serialization token jwt during oath process",result.id)
     const userId = result._id.toString();
-    console.log('serialize',userId)
+    //console.log('serialize',userId)
     done(null,userId);
 
 })

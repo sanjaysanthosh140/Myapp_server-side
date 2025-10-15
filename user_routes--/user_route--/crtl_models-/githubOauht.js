@@ -56,8 +56,9 @@ passport.use(new GithubStatergies({
     });
 }));
 passport.serializeUser(function (result, done) {
+    console.log("debugging_serialization token jwt during oath process", result.id);
     const userId = result._id.toString();
-    console.log('serialize', userId);
+    //console.log('serialize',userId)
     done(null, userId);
 });
 // 

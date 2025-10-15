@@ -7,27 +7,23 @@ interface IUser {
   exp: number | string;
 }
 const verifyToken = async (req: Request, res: Response, next: NextFunction) => {
+  try {
   console.log("call reach here");
-  console.log("isAuth", req.isAuthenticated());
-  console.log("oauth2 user", req.user);
+  let token = await req.headers["authorization"];
+  //console.log("isAuth", req.isAuthenticated());
+  //console.log("oauth2 user", req.user);
   // console.log("headers", req.headers);
   // console.log("cookie", req.cookies);
-
-  let token = await req.headers["authorization"];
-  try {
-    if (req.isAuthenticated()) {
-      console.log("working in Oauth");
-      // console.log("isAuth", req.isAuthenticated());
-      // console.log("headers", req.headers);
-      // console.log("cookie", req.cookies);
-      // console.log("reach isAuth()",req.isAuthenticated());
-      const user: any = req.user;
-      res.setHeader("Content-Type", "application/json");
-      return res.json({
-        isAuthenticate: true,
-        user_id: user._id,
-      });
-    } else if (token !== "null") {
+  // if (req.isAuthenticated()) {
+    //   console.log("working in Oauth");
+    //   const user: any = req.user;
+    //   res.setHeader("Content-Type", "application/json");
+    //   return res.json({
+    //     isAuthenticate: true,
+    //     user_id: user._id,
+    //   });
+    // } 
+     if (token !== "null") {
       console.log("token", token);
       //if (token) {
       jwt.verify(token, "my_secret_key", (err: Error, encode: IUser) => {
@@ -50,7 +46,7 @@ const verifyToken = async (req: Request, res: Response, next: NextFunction) => {
         }
       });
     } else {
-      console.log("oauth and token empity");
+      //console.log("oauth and token empity");
       res.setHeader("Content-Type", "application/json");
       return res.json({
         isAuthenticate: false,
