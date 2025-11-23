@@ -1,6 +1,7 @@
 const passport = require("passport");
 const GooogleStatergies = require("passport-google-oauth20").Strategy;
 import oauthUsers from "../models/google_Oauth";
+import { Request, response as res, Response } from "express";
 import { user_data_hashing } from "../hash_mehod--/data_hashing";
 import { generateToken } from "../Autherization/jwt";
 import { Types } from "mongoose";
@@ -15,7 +16,8 @@ passport.use(
     {
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      callbackURL: "https://myapp-server-side-rfxp.onrender.com/user_side/oauth2/redirect/google",
+      callbackURL:
+        "https://myapp-server-side-rfxp.onrender.com/user_side/oauth2/redirect/google",
     }, //https://myapp-server-side-pqkd.onrender.com/user_side/oauth2/redirect/google
     // console.log('Client ID:', process.env.GOOGLE_CLIENT_ID),
     // console.log('Client Secret:', process.env.GOOGLE_CLIENT_SECRET),
@@ -46,7 +48,7 @@ passport.use(
             const newAuthusers = new oauthUsers(user);
             result = await newAuthusers.save();
             if (result) {
-              console.log("from google oauth",result)
+              console.log("from google oauth", result);
               done(null, result);
               //counter_mail(result);
             }
@@ -59,9 +61,12 @@ passport.use(
   )
 );
 
-passport.serializeUser((result: any, done: any) => {
+passport.serializeUser(async (result: any, done: any) => {
   //console.log('Serializing user ID:', result._id);
-  console.log("debugging_serialization token jwt during oath process",result.id)
+  const user_id = result._id;
+  const decodedToken = await generateToken(user_id);
+  res.setHeader("Content-Type", "Application/json");
+  res.status(200).json({ name: result.displayName, token: decodedToken });
   const userId = result._id.toString();
   // console.log(userId)
   done(null, userId); // Pass just the ID

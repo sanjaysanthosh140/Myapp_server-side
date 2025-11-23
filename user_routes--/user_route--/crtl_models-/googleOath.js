@@ -15,7 +15,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const passport = require("passport");
 const GooogleStatergies = require("passport-google-oauth20").Strategy;
 const google_Oauth_1 = __importDefault(require("../models/google_Oauth"));
+const express_1 = require("express");
 const data_hashing_1 = require("../hash_mehod--/data_hashing");
+const jwt_1 = require("../Autherization/jwt");
 const mongoose_1 = require("mongoose");
 //import { counter_mail } from "../C_ounter_Mail/Main_function";
 require("dotenv").config();
@@ -61,13 +63,16 @@ function (accessToken, refreshToken, profile, done) {
         }
     });
 }));
-passport.serializeUser((result, done) => {
+passport.serializeUser((result, done) => __awaiter(void 0, void 0, void 0, function* () {
     //console.log('Serializing user ID:', result._id);
-    console.log("debugging_serialization token jwt during oath process", result.id);
+    const user_id = result._id;
+    const decodedToken = yield (0, jwt_1.generateToken)(user_id);
+    express_1.response.setHeader("Content-Type", "Application/json");
+    express_1.response.status(200).json({ name: result.displayName, token: decodedToken });
     const userId = result._id.toString();
     // console.log(userId)
     done(null, userId); // Pass just the ID
-});
+}));
 passport.deserializeUser((id, done) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         // let user

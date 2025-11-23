@@ -17,30 +17,30 @@ const mongoose_1 = require("mongoose");
 const data_hashing_1 = require("../hash_mehod--/data_hashing");
 //import { counter_mail } from "../C_ounter_Mail/Main_function";
 //import oauthUsers from "../models/google_Oauth";
-const passport = require('passport');
-const GithubStatergies = require('passport-github2');
-require('dotenv').config();
+const passport = require("passport");
+const GithubStatergies = require("passport-github2");
+require("dotenv").config();
 passport.use(new GithubStatergies({
     clientID: process.env.Git_ClientID,
     clientSecret: process.env.Git_Client_secrets,
-    callbackURL: "https://myapp-server-side-rfxp.onrender.com/user_side/oauth3/github/callback"
+    callbackURL: "https://myapp-server-side-rfxp.onrender.com/user_side/oauth3/github/callback",
 }, function (accessToken, refreshToken, profile, cb) {
     return __awaiter(this, void 0, void 0, function* () {
-        console.log('porfile', profile);
+        console.log("porfile", profile);
         if (profile) {
             const userIn = yield google_Oauth_1.default.findOne({
-                name: profile.displayName
+                name: profile.displayName,
             });
             if (userIn) {
-                console.log('userIn', userIn);
+                console.log("userIn", userIn);
                 cb(null, userIn);
             }
             else {
-                console.log('profile', profile);
+                console.log("profile", profile);
                 const userData = {
                     name: profile.displayName,
                     email: profile.username,
-                    password: profile.id
+                    password: profile.id,
                 };
                 (0, data_hashing_1.user_data_hashing)(userData).then((data) => __awaiter(this, void 0, void 0, function* () {
                     const newAuthusers = new google_Oauth_1.default(data);
@@ -61,7 +61,7 @@ passport.serializeUser(function (result, done) {
     //console.log('serialize',userId)
     done(null, userId);
 });
-// 
+//
 passport.deserializeUser(function (id, done) {
     return __awaiter(this, void 0, void 0, function* () {
         if (!mongoose_1.Types.ObjectId.isValid(id)) {
@@ -70,7 +70,7 @@ passport.deserializeUser(function (id, done) {
         const objectId = new mongoose_1.Types.ObjectId(id);
         //user = await oauth_user.findById(objectId)
         let user = yield google_Oauth_1.default.findById(objectId);
-        console.log('deserialize', user);
+        console.log("deserialize", user);
         done(null, user);
     });
 });
