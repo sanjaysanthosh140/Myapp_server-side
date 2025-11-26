@@ -15,8 +15,7 @@ passport.use(
     {
       clientID: process.env.Git_ClientID,
       clientSecret: process.env.Git_Client_secrets,
-      callbackURL:
-        "https://myapp-server-side-rfxp.onrender.com/user_side/oauth3/github/callback",
+      callbackURL: "https://myapp-server-side-rfxp.onrender.com/user_side/oauth3/github/callback",
     },
     async function (
       accessToken: any,
